@@ -2,8 +2,8 @@
 
 // Google Sheets configuration
 const GOOGLE_SHEETS_CONFIG = {
-    // Replace with your Google Apps Script Web App URL
-    scriptUrl: 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec',
+    // Google Apps Script Web App URL
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbwmuP5Ou5NasZ_RP9wm4sHDgUTsYnI6vJCFyyADRaHIiz87DM6EtwQPCwy4w0F8m_vX/exec',
     sheetId: '1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM'
 };
 
