@@ -1,0 +1,32 @@
+{
+  "name": "open-build-website",
+  "version": "1.0.0",
+  "description": "Open Build - Software Development Training & Mentorship website",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build process needed for static site'",
+    "deploy": "echo 'Deployed automatically via GitHub Pages'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/open-build-new-website.git"
+  },
+  "keywords": [
+    "open-build",
+    "software-development",
+    "training",
+    "mentorship",
+    "github-pages",
+    "tailwind-css"
+  ],
+  "author": "Open Build",
+  "license": "MIT",
+  "homepage": "https://yourusername.github.io/open-build-new-website",
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
