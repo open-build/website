@@ -11,17 +11,42 @@ const GOOGLE_SHEETS_CONFIG = {
 const navbar = document.getElementById('navbar');
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
+const themeToggle = document.getElementById('theme-toggle');
 const applicationModal = document.getElementById('application-modal');
 const applicationForm = document.getElementById('application-form');
 const contactForm = document.getElementById('contact-form');
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    initializeTheme();
     initializeNavigation();
     initializeFadeInAnimations();
     initializeFormHandlers();
     initializeSmoothScrolling();
 });
+
+// Theme functionality
+function initializeTheme() {
+    // Check for saved theme preference or default to 'light'
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+
+    // Theme toggle event listener
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+}
+
+function setTheme(theme) {
+    if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+}
 
 // Navigation functionality
 function initializeNavigation() {

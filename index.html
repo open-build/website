@@ -52,6 +52,7 @@
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -72,74 +73,108 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="font-sans">
+<body class="bg-white dark:bg-slate-900 text-gray-900 dark:text-white font-sans transition-colors duration-300">
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-between items-center py-4">
+    <nav class="fixed top-0 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm z-50 border-b border-gray-200 dark:border-slate-700 transition-colors duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-3">
-                    <img src="assets/img/logo.png" alt="Open Build Logo" class="h-10 w-auto">
-                    <span class="text-xl font-bold text-gray-dark">Open Build</span>
+                    <img src="assets/img/OPEN-BUILD-LOGO.png" alt="Open Build Logo" class="h-8 w-auto">
+                    <div class="text-sm text-gray-600 dark:text-gray-300 leading-tight">
+                        <div>AI Software Development</div>
+                        <div>Training & Mentorship</div>
+                    </div>
                 </div>
                 
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary">
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors duration-300">
+                        <i id="theme-icon" class="fas fa-moon dark:hidden"></i>
+                        <i id="theme-icon-dark" class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden text-gray-600 dark:text-white" id="mobile-menu-btn">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
-                </div>
-                
-                <!-- Desktop menu -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-gray-600 hover:text-primary transition-colors font-medium">Home</a>
-                    <a href="#about" class="text-gray-600 hover:text-primary transition-colors font-medium">About</a>
-                    <a href="#services" class="text-gray-600 hover:text-primary transition-colors font-medium">Services</a>
-                    <a href="#pricing" class="text-gray-600 hover:text-primary transition-colors font-medium">Pricing</a>
-                    <a href="#apply" class="text-gray-600 hover:text-primary transition-colors font-medium">Apply</a>
-                    <a href="#contact" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium">Contact</a>
+                    
+                    <!-- Desktop navigation -->
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#home" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Home</a>
+                        <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">About</a>
+                        <a href="#services" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Services</a>
+                        <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Pricing</a>
+                        <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Contact</a>
+                    </div>
                 </div>
             </div>
             
-            <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <div class="flex flex-col space-y-3">
-                    <a href="#home" class="text-gray-600 hover:text-primary transition-colors font-medium">Home</a>
-                    <a href="#about" class="text-gray-600 hover:text-primary transition-colors font-medium">About</a>
-                    <a href="#services" class="text-gray-600 hover:text-primary transition-colors font-medium">Services</a>
-                    <a href="#pricing" class="text-gray-600 hover:text-primary transition-colors font-medium">Pricing</a>
-                    <a href="#apply" class="text-gray-600 hover:text-primary transition-colors font-medium">Apply</a>
-                    <a href="#contact" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium inline-block text-center">Contact</a>
-                </div>
+            <!-- Mobile navigation -->
+            <div class="md:hidden mt-4 space-y-2 hidden" id="mobile-menu">
+                <a href="#home" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">Home</a>
+                <a href="#about" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">About</a>
+                <a href="#services" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">Services</a>
+                <a href="#pricing" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">Pricing</a>
+                <a href="#contact" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center relative overflow-hidden">
-        <!-- Background Image -->
-        <div class="absolute inset-0 z-0">
-            <img src="assets/img/comms.png" alt="Open Build Background" class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-50/90 via-purple-50/90 to-cyan-50/90"></div>
-        </div>
-        
+    <section id="home" class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-cyan-50 dark:from-slate-900 dark:via-blue-900 dark:to-slate-900 overflow-hidden transition-colors duration-300">
         <!-- Background Animation -->
-        <div class="absolute inset-0 opacity-10 z-10">
-            <div class="absolute top-20 left-20 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-            <div class="absolute top-40 right-20 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-            <div class="absolute -bottom-8 left-40 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+        <div class="absolute inset-0 opacity-10 dark:opacity-10 overflow-hidden z-10">
+            <!-- Code Brackets -->
+            <div class="absolute top-20 left-20 text-6xl text-primary font-mono animate-float code-element">{ }</div>
+            <div class="absolute top-32 right-32 text-4xl text-secondary font-mono animate-code-drift animation-delay-2000 code-element">< /></div>
+            <div class="absolute bottom-40 left-40 text-5xl text-accent font-mono animate-float animation-delay-4000 code-element">[ ]</div>
+            
+            <!-- Tetris-like blocks -->
+            <div class="absolute top-10 left-1/4 w-8 h-8 bg-primary animate-tetris tetris-block"></div>
+            <div class="absolute top-0 right-1/3 w-6 h-12 bg-secondary animate-tetris animation-delay-2000 tetris-block"></div>
+            <div class="absolute top-5 left-1/2 w-12 h-6 bg-accent animate-tetris animation-delay-4000 tetris-block"></div>
+            <div class="absolute top-2 right-1/4 w-8 h-8 bg-primary animate-tetris animation-delay-6000 tetris-block"></div>
+            <div class="absolute top-8 left-3/4 w-6 h-6 bg-secondary animate-tetris animation-delay-8000 tetris-block"></div>
+            
+            <!-- Code symbols -->
+            <div class="absolute top-60 right-20 text-3xl text-primary font-mono animate-code-drift animation-delay-2000 code-element">&&</div>
+            <div class="absolute bottom-20 left-10 text-4xl text-secondary font-mono animate-float animation-delay-6000 code-element">||</div>
+            <div class="absolute top-1/2 right-10 text-2xl text-accent font-mono animate-code-drift animation-delay-4000 code-element">!=</div>
+            <div class="absolute bottom-60 right-60 text-3xl text-primary font-mono animate-float animation-delay-1000 code-element">=></div>
+            
+            <!-- Git diff symbols -->
+            <div class="absolute top-3/4 left-1/4 text-2xl text-secondary font-mono animate-code-drift animation-delay-3000 code-element">++++</div>
+            <div class="absolute bottom-1/4 right-1/3 text-2xl text-accent font-mono animate-float animation-delay-5000 code-element">----</div>
+            
+            <!-- Additional programming symbols -->
+            <div class="absolute top-40 left-1/3 text-3xl text-secondary font-mono animate-code-drift animation-delay-3000 code-element">++</div>
+            <div class="absolute bottom-32 left-2/3 text-4xl text-accent font-mono animate-float animation-delay-5000 code-element">fn</div>
+            <div class="absolute top-3/4 left-20 text-2xl text-primary font-mono animate-code-drift animation-delay-7000 code-element">@</div>
+            
+            <!-- Binary and shell references -->
+            <div class="absolute top-1/4 right-1/4 text-xl text-secondary font-mono animate-float animation-delay-1500 code-element">101010</div>
+            <div class="absolute bottom-1/3 left-1/2 text-2xl text-accent font-mono animate-code-drift animation-delay-4500 code-element">#!/bin/sh</div>
         </div>
         
-        <div class="container mx-auto px-6 relative z-30">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-5xl md:text-7xl font-bold text-gray-dark mb-6 leading-tight">
-                    Welcome to <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Open Build</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                    We train mentors and support open source developers through comprehensive training programs, 
-                    mentorship, and affordable software development services.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#services" class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-dark transform hover:scale-105 transition-all duration-200 shadow-lg">
+        <div class="container mx-auto px-6 text-center relative z-30">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 dark:from-blue-400 dark:via-green-400 dark:to-yellow-400 bg-clip-text text-transparent">
+                Open Build
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+                Professional software development training and services for open source developers
+            </p>
+            <p class="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+                Learn modern development practices, get expert mentorship, and build your career with our comprehensive training programs and services.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#services" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                    Explore Services
+                </a>
+                <a href="#pricing" class="border border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                    View Pricing
+                </a>
+            </div>
+        </div>
                         Explore Services
                     </a>
                     <a href="#apply" class="border-2 border-primary text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary hover:text-white transition-all duration-200">
@@ -156,21 +191,21 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-white">
+    <section id="services" class="py-20 bg-white dark:bg-slate-800 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-dark mb-4">Our Services</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive training and development programs designed to accelerate your software development career</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Our Services</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Comprehensive training and development programs designed to accelerate your software development career</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Junior Developer Program -->
-                <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-primary/20">
+                <div class="group bg-white dark:bg-slate-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-600 hover:border-primary/20 dark:hover:border-primary/40">
                     <div class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-graduation-cap text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-dark mb-4">Junior Developer Program</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Junior Developer Program</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         Perfect for students and newly trained developers looking to gain real-world experience, 
                         learn industry tools, and develop teamwork skills in a supportive environment.
                     </p>
@@ -185,41 +220,41 @@
                 </div>
                 
                 <!-- Mentorship Program -->
-                <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-primary/20">
+                <div class="group bg-white dark:bg-slate-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-600 hover:border-primary/20 dark:hover:border-primary/40">
                     <div class="w-16 h-16 bg-gradient-to-r from-secondary to-accent rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-users text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-dark mb-4">Become a Mentor</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Become a Mentor</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         Join our volunteer mentorship program and make a lasting impact on the next generation of developers. 
                         Build connections and grow your leadership skills.
                     </p>
-                    <ul class="text-gray-600 space-y-2 mb-6">
+                    <ul class="text-gray-600 dark:text-gray-300 space-y-2 mb-6">
                         <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Flexible volunteer positions</li>
                         <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Professional development</li>
                         <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Networking opportunities</li>
                     </ul>
-                    <a href="#apply" class="inline-flex items-center text-secondary font-semibold hover:text-purple-800 transition-colors">
+                    <a href="#apply" class="inline-flex items-center text-secondary font-semibold hover:text-purple-800 dark:hover:text-purple-400 transition-colors">
                         Join as Mentor <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
                 <!-- Corporate Training -->
-                <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-primary/20">
+                <div class="group bg-white dark:bg-slate-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-600 hover:border-primary/20 dark:hover:border-primary/40">
                     <div class="w-16 h-16 bg-gradient-to-r from-accent to-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-building text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-dark mb-4">Corporate Training</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Corporate Training</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         Affordable training solutions for organizations looking to upskill their development teams 
                         and implement robust junior developer programs.
                     </p>
-                    <ul class="text-gray-600 space-y-2 mb-6">
+                    <ul class="text-gray-600 dark:text-gray-300 space-y-2 mb-6">
                         <li class="flex items-center"><i class="fas fa-check text-accent mr-2"></i> Custom training programs</li>
                         <li class="flex items-center"><i class="fas fa-check text-accent mr-2"></i> Team development workshops</li>
                         <li class="flex items-center"><i class="fas fa-check text-accent mr-2"></i> Ongoing support</li>
                     </ul>
-                    <a href="#contact" class="inline-flex items-center text-accent font-semibold hover:text-cyan-600 transition-colors">
+                    <a href="#contact" class="inline-flex items-center text-accent font-semibold hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
                         Get Started <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -228,7 +263,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50">
+    <section id="about" class="py-20 bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
@@ -238,8 +273,8 @@
                     <div class="w-20 h-20 bg-gradient-to-r from-primary to-secondary rounded-2xl flex items-center justify-center mb-8">
                         <i class="fas fa-heart text-white text-3xl"></i>
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-dark mb-6">Ethical AI & Open Source</h2>
-                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Ethical AI & Open Source</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         We're proud to be part of the Standards Body for AI Fairness and Inclusivity, working to ensure 
                         AI and ML models are free from gender and cultural biases. Our commitment to ethical technology 
                         drives everything we do.
@@ -249,15 +284,15 @@
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-primary text-xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-semibold text-gray-dark mb-2">AI Fairness Research</h4>
-                                <p class="text-gray-600">Contributing to robust evaluation standards for bias-free AI development</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">AI Fairness Research</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Contributing to robust evaluation standards for bias-free AI development</p>
                             </div>
                         </div>
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-primary text-xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-semibold text-gray-dark mb-2">Open Source Commitment</h4>
-                                <p class="text-gray-600">Building and maintaining repositories that benefit the entire developer community</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Open Source Commitment</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Building and maintaining repositories that benefit the entire developer community</p>
                             </div>
                         </div>
                         <div class="flex items-start">
@@ -313,7 +348,7 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-white">
+    <section id="pricing" class="py-20 bg-white dark:bg-slate-800 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-dark mb-4">Transparent Pricing</h2>
@@ -387,7 +422,7 @@
     </section>
 
     <!-- Application Section -->
-    <section id="apply" class="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
+    <section id="apply" class="py-20 bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-dark mb-4">Join Our Community</h2>
@@ -427,7 +462,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-dark text-white">
+    <section id="contact" class="py-20 bg-gray-100 dark:bg-gray-dark text-gray-900 dark:text-white transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h2>
@@ -515,13 +550,16 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gray-800 dark:bg-gray-900 text-white py-12 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
                         <img src="assets/img/logo.png" alt="Open Build Logo" class="w-8 h-8">
-                        <span class="text-lg font-bold">Open Build</span>
+                        <div class="text-sm text-gray-300 leading-tight">
+                            <div>AI Software Development</div>
+                            <div>Training & Mentorship</div>
+                        </div>
                     </div>
                     <p class="text-gray-400 text-sm">
                         Empowering developers through training, mentorship, and ethical open source development.
