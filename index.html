@@ -201,7 +201,7 @@
                         Perfect for students and newly trained developers looking to gain real-world experience, 
                         learn industry tools, and develop teamwork skills in a supportive environment.
                     </p>
-                    <ul class="text-gray-600 space-y-2 mb-6">
+                    <ul class="text-gray-600 dark:text-gray-300 space-y-2 mb-6">
                         <li class="flex items-center"><i class="fas fa-check text-primary mr-2"></i> Hands-on project experience</li>
                         <li class="flex items-center"><i class="fas fa-check text-primary mr-2"></i> Mentorship from senior developers</li>
                         <li class="flex items-center"><i class="fas fa-check text-primary mr-2"></i> Industry-standard tools training</li>
@@ -362,7 +362,7 @@
                         <li class="flex items-center"><i class="fas fa-check text-primary mr-3"></i> Basic training materials</li>
                         <li class="flex items-center"><i class="fas fa-check text-primary mr-3"></i> Junior program application</li>
                     </ul>
-                    <button onclick="openApplicationForm('individual')" class="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+                    <button onclick="openApplicationForm('individual')" class="w-full bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors">
                         Apply Now
                     </button>
                 </div>
@@ -405,7 +405,7 @@
                         <li class="flex items-center"><i class="fas fa-check text-primary mr-3"></i> Custom integration support</li>
                         <li class="flex items-center"><i class="fas fa-check text-primary mr-3"></i> 24/7 dedicated support</li>
                     </ul>
-                    <button onclick="openContactForm('enterprise')" class="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+                    <button onclick="openContactForm('enterprise')" class="w-full bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors">
                         Contact Sales
                     </button>
                 </div>
@@ -605,7 +605,7 @@
             <div class="p-8">
                 <div class="flex justify-between items-center mb-6">
                     <h3 id="modal-title" class="text-2xl font-bold text-gray-900 dark:text-white">Developer Application</h3>
-                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <button onclick="closeModal()" class="text-gray-400 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
@@ -615,17 +615,17 @@
                     
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label for="app-name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                            <label for="app-name" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Full Name</label>
                             <input type="text" id="app-name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:outline-none">
                         </div>
                         <div>
-                            <label for="app-email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <label for="app-email" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Email</label>
                             <input type="email" id="app-email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:outline-none">
                         </div>
                     </div>
                     
                     <div>
-                        <label for="app-experience" class="block text-sm font-medium text-gray-700 mb-2">Experience Level</label>
+                        <label for="app-experience" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Experience Level</label>
                         <select id="app-experience" name="experience" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:outline-none">
                             <option value="">Select your experience level</option>
                             <option value="beginner">Beginner (0-1 years)</option>
@@ -636,17 +636,17 @@
                     </div>
                     
                     <div>
-                        <label for="app-skills" class="block text-sm font-medium text-gray-700 mb-2">Technical Skills</label>
+                        <label for="app-skills" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Technical Skills</label>
                         <textarea id="app-skills" name="skills" rows="3" placeholder="List your programming languages, frameworks, and tools..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:outline-none"></textarea>
                     </div>
                     
                     <div>
-                        <label for="app-motivation" class="block text-sm font-medium text-gray-700 mb-2">Why do you want to join Open Build?</label>
+                        <label for="app-motivation" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Why do you want to join Open Build?</label>
                         <textarea id="app-motivation" name="motivation" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:outline-none"></textarea>
                     </div>
                     
                     <div>
-                        <label for="app-github" class="block text-sm font-medium text-gray-700 mb-2">GitHub Profile (Optional)</label>
+                        <label for="app-github" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">GitHub Profile (Optional)</label>
                         <input type="url" id="app-github" name="github" placeholder="https://github.com/username" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:outline-none">
                     </div>
                     
