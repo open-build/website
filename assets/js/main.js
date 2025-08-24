@@ -40,20 +40,23 @@ function initializeTheme() {
     });
 }
 
+// Theme management
 function setTheme(theme) {
-    document.body.setAttribute('data-theme', theme);
-    
-    // Update theme toggle icons
-    const moonIcon = document.getElementById('theme-icon');
-    const sunIcon = document.getElementById('theme-icon-dark');
+    const html = document.documentElement;
+    const themeIcon = document.getElementById('theme-icon');
+    const themeIconDark = document.getElementById('theme-icon-dark');
     
     if (theme === 'dark') {
-        moonIcon.classList.add('hidden');
-        sunIcon.classList.remove('hidden');
+        html.classList.add('dark');
+        themeIcon.classList.add('hidden');
+        themeIconDark.classList.remove('hidden');
     } else {
-        moonIcon.classList.remove('hidden');
-        sunIcon.classList.add('hidden');
+        html.classList.remove('dark');
+        themeIcon.classList.remove('hidden');
+        themeIconDark.classList.add('hidden');
     }
+    
+    localStorage.setItem('theme', theme);
 }
 
 // Navigation functionality
