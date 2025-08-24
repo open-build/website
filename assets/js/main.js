@@ -33,7 +33,7 @@ function initializeTheme() {
 
     // Theme toggle event listener
     themeToggle.addEventListener('click', function() {
-        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        const currentTheme = document.body.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
         localStorage.setItem('theme', newTheme);
@@ -41,10 +41,18 @@ function initializeTheme() {
 }
 
 function setTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    
+    // Update theme toggle icons
+    const moonIcon = document.getElementById('theme-icon');
+    const sunIcon = document.getElementById('theme-icon-dark');
+    
     if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
+        moonIcon.classList.add('hidden');
+        sunIcon.classList.remove('hidden');
     } else {
-        document.documentElement.classList.remove('dark');
+        moonIcon.classList.remove('hidden');
+        sunIcon.classList.add('hidden');
     }
 }
 

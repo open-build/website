@@ -4,143 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Build - Software Development Training & Mentorship</title>
-    <meta name="description" content="Open Build provides software development training, mentorship programs, and affordable services for developers and organizations."> mentorship programs, and affordable services for developers and organizations.">
+    <meta name="description" content="Open Build provides software development training, mentorship programs, and affordable services for developers and organizations.">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom CSS -->
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Custom Animations CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!-- Tailwind Config -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#2563eb',
-                        secondary: '#7c3aed',
-                        accent: '#06b6d4',
-                        'primary-dark': '#1d4ed8',
-                        'gray-dark': '#1f2937'
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="bg-white dark:bg-slate-900 text-gray-900 dark:text-white font-sans transition-colors duration-300">
+<body data-theme="light">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm z-50 border-b border-gray-200 dark:border-slate-700 transition-colors duration-300">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <img src="assets/img/OPEN-BUILD-LOGO.png" alt="Open Build Logo" class="h-8 w-auto">
-                    <div class="text-sm text-gray-600 dark:text-gray-300 leading-tight">
-                        <div>AI Software Development</div>
-                        <div>Training & Mentorship</div>
-                    </div>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <!-- Theme Toggle Button -->
-                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors duration-300">
-                        <i id="theme-icon" class="fas fa-moon dark:hidden"></i>
-                        <i id="theme-icon-dark" class="fas fa-sun hidden dark:block"></i>
-                    </button>
-                    
-                    <!-- Mobile menu button -->
-                    <button class="md:hidden text-gray-600 dark:text-white" id="mobile-menu-btn">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                    
-                    <!-- Desktop navigation -->
-                    <div class="hidden md:flex space-x-8">
-                        <a href="#home" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Home</a>
-                        <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">About</a>
-                        <a href="#services" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Services</a>
-                        <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Pricing</a>
-                        <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Contact</a>
-                    </div>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo-group">
+                <img src="assets/img/OPEN-BUILD-LOGO.png" alt="Open Build Logo" class="logo">
+                <div class="logo-text">
+                    <div>AI Software Development</div>
+                    <div>Training & Mentorship</div>
                 </div>
             </div>
             
-            <!-- Mobile navigation -->
-            <div class="md:hidden mt-4 space-y-2 hidden" id="mobile-menu">
-                <a href="#home" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">Home</a>
-                <a href="#about" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">About</a>
-                <a href="#services" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">Services</a>
-                <a href="#pricing" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">Pricing</a>
-                <a href="#contact" class="block text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors py-2">Contact</a>
+            <div class="flex-center" style="gap: 1rem;">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="theme-toggle">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                    <i id="theme-icon-dark" class="fas fa-sun hidden"></i>
+                </button>
+                
+                <!-- Mobile menu button -->
+                <button class="theme-toggle md:hidden" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <!-- Desktop navigation -->
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
             </div>
+        </div>
+        
+        <!-- Mobile navigation -->
+        <div class="hidden" id="mobile-menu" style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-primary);">
+            <a href="#home" class="nav-link block" style="padding: 0.5rem 0;">Home</a>
+            <a href="#about" class="nav-link block" style="padding: 0.5rem 0;">About</a>
+            <a href="#services" class="nav-link block" style="padding: 0.5rem 0;">Services</a>
+            <a href="#pricing" class="nav-link block" style="padding: 0.5rem 0;">Pricing</a>
+            <a href="#contact" class="nav-link block" style="padding: 0.5rem 0;">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-cyan-50 dark:from-slate-900 dark:via-blue-900 dark:to-slate-900 overflow-hidden transition-colors duration-300">
+    <section id="home" class="hero">
         <!-- Background Animation -->
-        <div class="absolute inset-0 opacity-10 dark:opacity-10 overflow-hidden z-10">
+        <div class="absolute inset-0 opacity-10 overflow-hidden" style="z-index: 10;">
             <!-- Code Brackets -->
-            <div class="absolute top-20 left-20 text-6xl text-primary font-mono animate-float code-element">{ }</div>
-            <div class="absolute top-32 right-32 text-4xl text-secondary font-mono animate-code-drift animation-delay-2000 code-element">< /></div>
-            <div class="absolute bottom-40 left-40 text-5xl text-accent font-mono animate-float animation-delay-4000 code-element">[ ]</div>
+            <div class="absolute top-20 left-20 text-6xl font-mono animate-float code-element" style="color: var(--primary);">{ }</div>
+            <div class="absolute top-32 right-32 text-4xl font-mono animate-code-drift animation-delay-2000 code-element" style="color: var(--secondary);">< /></div>
+            <div class="absolute bottom-40 left-40 text-5xl font-mono animate-float animation-delay-4000 code-element" style="color: var(--accent);">[ ]</div>
             
             <!-- Tetris-like blocks -->
-            <div class="absolute top-10 left-1/4 w-8 h-8 bg-primary animate-tetris tetris-block"></div>
-            <div class="absolute top-0 right-1/3 w-6 h-12 bg-secondary animate-tetris animation-delay-2000 tetris-block"></div>
-            <div class="absolute top-5 left-1/2 w-12 h-6 bg-accent animate-tetris animation-delay-4000 tetris-block"></div>
-            <div class="absolute top-2 right-1/4 w-8 h-8 bg-primary animate-tetris animation-delay-6000 tetris-block"></div>
-            <div class="absolute top-8 left-3/4 w-6 h-6 bg-secondary animate-tetris animation-delay-8000 tetris-block"></div>
+            <div class="absolute top-10 left-1/4 w-8 h-8 animate-tetris tetris-block" style="background-color: var(--primary);"></div>
+            <div class="absolute top-0 right-1/3 w-6 h-12 animate-tetris animation-delay-2000 tetris-block" style="background-color: var(--secondary);"></div>
+            <div class="absolute top-5 left-1/2 w-12 h-6 animate-tetris animation-delay-4000 tetris-block" style="background-color: var(--accent);"></div>
+            <div class="absolute top-2 right-1/4 w-8 h-8 animate-tetris animation-delay-6000 tetris-block" style="background-color: var(--primary);"></div>
+            <div class="absolute top-8 left-3/4 w-6 h-6 animate-tetris animation-delay-8000 tetris-block" style="background-color: var(--secondary);"></div>
             
             <!-- Code symbols -->
-            <div class="absolute top-60 right-20 text-3xl text-primary font-mono animate-code-drift animation-delay-2000 code-element">&&</div>
-            <div class="absolute bottom-20 left-10 text-4xl text-secondary font-mono animate-float animation-delay-6000 code-element">||</div>
-            <div class="absolute top-1/2 right-10 text-2xl text-accent font-mono animate-code-drift animation-delay-4000 code-element">!=</div>
-            <div class="absolute bottom-60 right-60 text-3xl text-primary font-mono animate-float animation-delay-1000 code-element">=></div>
+            <div class="absolute top-60 right-20 text-3xl font-mono animate-code-drift animation-delay-2000 code-element" style="color: var(--primary);">&&</div>
+            <div class="absolute bottom-20 left-10 text-4xl font-mono animate-float animation-delay-6000 code-element" style="color: var(--secondary);">||</div>
+            <div class="absolute top-1/2 right-10 text-2xl font-mono animate-code-drift animation-delay-4000 code-element" style="color: var(--accent);">!=</div>
+            <div class="absolute bottom-60 right-60 text-3xl font-mono animate-float animation-delay-1000 code-element" style="color: var(--primary);">=></div>
             
             <!-- Git diff symbols -->
-            <div class="absolute top-3/4 left-1/4 text-2xl text-secondary font-mono animate-code-drift animation-delay-3000 code-element">++++</div>
-            <div class="absolute bottom-1/4 right-1/3 text-2xl text-accent font-mono animate-float animation-delay-5000 code-element">----</div>
+            <div class="absolute top-3/4 left-1/4 text-2xl font-mono animate-code-drift animation-delay-3000 code-element" style="color: var(--secondary);">++++</div>
+            <div class="absolute bottom-1/4 right-1/3 text-2xl font-mono animate-float animation-delay-5000 code-element" style="color: var(--accent);">----</div>
             
             <!-- Additional programming symbols -->
-            <div class="absolute top-40 left-1/3 text-3xl text-secondary font-mono animate-code-drift animation-delay-3000 code-element">++</div>
-            <div class="absolute bottom-32 left-2/3 text-4xl text-accent font-mono animate-float animation-delay-5000 code-element">fn</div>
-            <div class="absolute top-3/4 left-20 text-2xl text-primary font-mono animate-code-drift animation-delay-7000 code-element">@</div>
+            <div class="absolute top-40 left-1/3 text-3xl font-mono animate-code-drift animation-delay-3000 code-element" style="color: var(--secondary);">++</div>
+            <div class="absolute bottom-32 left-2/3 text-4xl font-mono animate-float animation-delay-5000 code-element" style="color: var(--accent);">fn</div>
+            <div class="absolute top-3/4 left-20 text-2xl font-mono animate-code-drift animation-delay-7000 code-element" style="color: var(--primary);">@</div>
             
             <!-- Binary and shell references -->
-            <div class="absolute top-1/4 right-1/4 text-xl text-secondary font-mono animate-float animation-delay-1500 code-element">101010</div>
-            <div class="absolute bottom-1/3 left-1/2 text-2xl text-accent font-mono animate-code-drift animation-delay-4500 code-element">#!/bin/sh</div>
+            <div class="absolute top-1/4 right-1/4 text-xl font-mono animate-float animation-delay-1500 code-element" style="color: var(--secondary);">101010</div>
+            <div class="absolute bottom-1/3 left-1/2 text-2xl font-mono animate-code-drift animation-delay-4500 code-element" style="color: var(--accent);">#!/bin/sh</div>
         </div>
         
-        <div class="container mx-auto px-6 text-center relative z-30">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 dark:from-blue-400 dark:via-green-400 dark:to-yellow-400 bg-clip-text text-transparent">
-                Open Build
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+        <div class="hero-content">
+            <h1 class="heading-xl">Open Build</h1>
+            <p class="hero-subtitle text-large">
                 Professional software development training and services for open source developers
             </p>
-            <p class="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+            <p class="hero-subtitle text-medium mb-8">
                 Learn modern development practices, get expert mentorship, and build your career with our comprehensive training programs and services.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#services" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary btn-large">
                     Explore Services
                 </a>
-                <a href="#pricing" class="border border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                <a href="#pricing" class="btn btn-secondary btn-large">
                     View Pricing
                 </a>
             </div>
@@ -148,76 +122,76 @@
         
         <!-- Scroll indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-2xl text-gray-500 dark:text-gray-400"></i>
+            <i class="fas fa-chevron-down text-2xl text-muted"></i>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-white dark:bg-slate-800 transition-colors duration-300">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Our Services</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Comprehensive training and development programs designed to accelerate your software development career</p>
+    <section id="services" class="section">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2 class="heading-lg">Our Services</h2>
+                <p class="text-large">Comprehensive training and development programs designed to accelerate your software development career</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid-3">
                 <!-- Junior Developer Program -->
-                <div class="group bg-white dark:bg-slate-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-600 hover:border-primary/20 dark:hover:border-primary/40">
-                    <div class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Junior Developer Program</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                    <h3 class="card-title">Junior Developer Program</h3>
+                    <p class="card-text">
                         Perfect for students and newly trained developers looking to gain real-world experience, 
                         learn industry tools, and develop teamwork skills in a supportive environment.
                     </p>
-                    <ul class="text-gray-600 dark:text-gray-300 space-y-2 mb-6">
-                        <li class="flex items-center"><i class="fas fa-check text-primary mr-2"></i> Hands-on project experience</li>
-                        <li class="flex items-center"><i class="fas fa-check text-primary mr-2"></i> Mentorship from senior developers</li>
-                        <li class="flex items-center"><i class="fas fa-check text-primary mr-2"></i> Industry-standard tools training</li>
+                    <ul class="card-list">
+                        <li><i class="fas fa-check"></i> Hands-on project experience</li>
+                        <li><i class="fas fa-check"></i> Mentorship from senior developers</li>
+                        <li><i class="fas fa-check"></i> Industry-standard tools training</li>
                     </ul>
-                    <a href="#apply" class="inline-flex items-center text-primary font-semibold hover:text-primary-dark transition-colors">
-                        Apply Now <i class="fas fa-arrow-right ml-2"></i>
+                    <a href="#apply" class="btn btn-primary">
+                        Apply Now <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
                     </a>
                 </div>
                 
                 <!-- Mentorship Program -->
-                <div class="group bg-white dark:bg-slate-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-600 hover:border-primary/20 dark:hover:border-primary/40">
-                    <div class="w-16 h-16 bg-gradient-to-r from-secondary to-accent rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-users text-white text-2xl"></i>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, var(--secondary), var(--accent));">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Become a Mentor</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                    <h3 class="card-title">Become a Mentor</h3>
+                    <p class="card-text">
                         Join our volunteer mentorship program and make a lasting impact on the next generation of developers. 
                         Build connections and grow your leadership skills.
                     </p>
-                    <ul class="text-gray-600 dark:text-gray-300 space-y-2 mb-6">
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Flexible volunteer positions</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Professional development</li>
-                        <li class="flex items-center"><i class="fas fa-check text-secondary mr-2"></i> Networking opportunities</li>
+                    <ul class="card-list">
+                        <li><i class="fas fa-check" style="color: var(--secondary);"></i> Flexible volunteer positions</li>
+                        <li><i class="fas fa-check" style="color: var(--secondary);"></i> Professional development</li>
+                        <li><i class="fas fa-check" style="color: var(--secondary);"></i> Networking opportunities</li>
                     </ul>
-                    <a href="#apply" class="inline-flex items-center text-secondary font-semibold hover:text-purple-800 dark:hover:text-purple-400 transition-colors">
-                        Join as Mentor <i class="fas fa-arrow-right ml-2"></i>
+                    <a href="#apply" class="btn btn-secondary">
+                        Join as Mentor <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
                     </a>
                 </div>
                 
                 <!-- Corporate Training -->
-                <div class="group bg-white dark:bg-slate-700 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-600 hover:border-primary/20 dark:hover:border-primary/40">
-                    <div class="w-16 h-16 bg-gradient-to-r from-accent to-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-building text-white text-2xl"></i>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, var(--accent), var(--primary));">
+                        <i class="fas fa-building"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Corporate Training</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                    <h3 class="card-title">Corporate Training</h3>
+                    <p class="card-text">
                         Affordable training solutions for organizations looking to upskill their development teams 
                         and implement robust junior developer programs.
                     </p>
-                    <ul class="text-gray-600 dark:text-gray-300 space-y-2 mb-6">
-                        <li class="flex items-center"><i class="fas fa-check text-accent mr-2"></i> Custom training programs</li>
-                        <li class="flex items-center"><i class="fas fa-check text-accent mr-2"></i> Team development workshops</li>
-                        <li class="flex items-center"><i class="fas fa-check text-accent mr-2"></i> Ongoing support</li>
+                    <ul class="card-list">
+                        <li><i class="fas fa-check" style="color: var(--accent);"></i> Custom training programs</li>
+                        <li><i class="fas fa-check" style="color: var(--accent);"></i> Team development workshops</li>
+                        <li><i class="fas fa-check" style="color: var(--accent);"></i> Ongoing support</li>
                     </ul>
-                    <a href="#contact" class="inline-flex items-center text-accent font-semibold hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    <a href="#contact" class="btn" style="background-color: var(--accent); color: white;">
+                        Get Started <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
                     </a>
                 </div>
             </div>
