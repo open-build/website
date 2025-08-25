@@ -33,10 +33,9 @@ function initializeTheme() {
 
     // Theme toggle event listener
     themeToggle.addEventListener('click', function() {
-        const currentTheme = document.body.getAttribute('data-theme');
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
     });
 }
 
