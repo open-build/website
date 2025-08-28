@@ -227,16 +227,14 @@ async function handleApplicationSubmission(form) {
 // Submit data to Google Sheets
 async function submitToGoogleSheets(data, sheetName) {
     try {
+        // Create form data for Google Apps Script
+        const formData = new FormData();
+        formData.append('sheetName', sheetName);
+        formData.append('data', JSON.stringify(data));
+
         const response = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
             method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                sheetName: sheetName,
-                data: data
-            })
+            body: formData
         });
 
         if (!response.ok) {
@@ -253,16 +251,73 @@ async function submitToGoogleSheets(data, sheetName) {
     } catch (error) {
         console.error('Google Sheets submission error:', error);
         
-        // Fallback: try to send via email (mailto)
-        const subject = encodeURIComponent(`Open Build ${data.type} - ${data.name}`);
-        const body = encodeURIComponent(JSON.stringify(data, null, 2));
-        const mailtoLink = `mailto:contact@open.build?subject=${subject}&body=${body}`;
-        
-        // Open mailto as fallback
-        window.open(mailtoLink);
-        
-        throw error;
+        // Fallback: try JSONP approach
+        try {
+            return await submitViaJSONP(data, sheetName);
+        } catch (jsonpError) {
+            console.error('JSONP fallback failed:', jsonpError);
+            
+            // Final fallback: open mailto
+            const subject = encodeURIComponent(`Open Build ${data.type || 'Contact'} - ${data.name}`);
+            const body = encodeURIComponent(JSON.stringify(data, null, 2));
+            const mailtoLink = `mailto:contact@open.build?subject=${subject}&body=${body}`;
+            
+            // Show user the mailto option
+            if (confirm('There was an issue submitting your form online. Would you like to send it via email instead?')) {
+                window.open(mailtoLink);
+            }
+            
+            throw error;
+        }
     }
+}
+
+// JSONP fallback for CORS issues
+function submitViaJSONP(data, sheetName) {
+    return new Promise((resolve, reject) => {
+        const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+        
+        // Create script element
+        const script = document.createElement('script');
+        const params = new URLSearchParams({
+            callback: callbackName,
+            sheetName: sheetName,
+            data: JSON.stringify(data)
+        });
+        
+        script.src = `${GOOGLE_SHEETS_CONFIG.scriptUrl}?${params.toString()}`;
+        
+        // Set up callback
+        window[callbackName] = function(response) {
+            delete window[callbackName];
+            document.body.removeChild(script);
+            
+            if (response.success) {
+                resolve(response);
+            } else {
+                reject(new Error(response.error || 'Unknown error'));
+            }
+        };
+        
+        // Handle errors
+        script.onerror = function() {
+            delete window[callbackName];
+            document.body.removeChild(script);
+            reject(new Error('JSONP request failed'));
+        };
+        
+        // Add script to page
+        document.body.appendChild(script);
+        
+        // Timeout after 10 seconds
+        setTimeout(() => {
+            if (window[callbackName]) {
+                delete window[callbackName];
+                document.body.removeChild(script);
+                reject(new Error('Request timeout'));
+            }
+        }, 10000);
+    });
 }
 
 // Modal functions
