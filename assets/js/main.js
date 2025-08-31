@@ -3,7 +3,7 @@
 // Google Sheets configuration
 const GOOGLE_SHEETS_CONFIG = {
     // Google Apps Script Web App URL - UPDATE THIS WITH YOUR NEW DEPLOYMENT URL
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbwmuP5Ou5NasZ_RP9wm4sHDgUTsYnI6vJCFyyADRaHIiz87DM6EtwQPCwy4w0F8m_vX/exec',
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbz45XeMR5QG_5QMXiXfom8sV3okJcUW3bE59S19w5rcBHllaUP8AD6rMPzrnDLpxZuq/exec',
     sheetId: '1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM'
 };
 
