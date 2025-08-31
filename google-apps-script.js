@@ -14,7 +14,12 @@ function doPost(e) {
           success: false,
           error: 'Event object is undefined - check script deployment'
         }))
-        .setMimeType(ContentService.MimeType.JSON);
+        .setMimeType(ContentService.MimeType.JSON)
+        .setHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+        });
     }
 
     console.log('Event exists, checking postData...');
@@ -28,7 +33,12 @@ function doPost(e) {
           success: false,
           error: 'No postData received - check request format'
         }))
-        .setMimeType(ContentService.MimeType.JSON);
+        .setMimeType(ContentService.MimeType.JSON)
+        .setHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+        });
     }
 
     console.log('postData exists, checking contents...');
@@ -42,7 +52,12 @@ function doPost(e) {
           success: false,
           error: 'No content in postData - check request body'
         }))
-        .setMimeType(ContentService.MimeType.JSON);
+        .setMimeType(ContentService.MimeType.JSON)
+        .setHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+        });
     }
 
     console.log('Contents exists, parsing JSON...');
@@ -151,7 +166,12 @@ function doPost(e) {
         success: true,
         message: 'Data submitted successfully'
       }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+      });
 
   } catch (error) {
     console.error('Error:', error);
@@ -160,7 +180,12 @@ function doPost(e) {
         success: false,
         error: error.toString()
       }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+      });
   }
 }
 
@@ -223,6 +248,7 @@ function doOptions(e) {
   try {
     console.log('=== doOptions START ===');
     console.log('doOptions called with event:', e);
+    console.log('Handling CORS preflight request');
 
     // Handle CORS preflight requests
     return ContentService
@@ -231,17 +257,19 @@ function doOptions(e) {
       .setHeaders({
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
         'Access-Control-Max-Age': '86400'
       });
   } catch (error) {
     console.error('doOptions error:', error);
     return ContentService
-      .createTextOutput(JSON.stringify({
-        success: false,
-        error: 'doOptions error: ' + error.toString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput('')
+      .setMimeType(ContentService.MimeType.TEXT)
+      .setHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+      });
   }
 }
 

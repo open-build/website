@@ -245,10 +245,11 @@ async function submitToGoogleSheets(data, sheetName) {
         console.log('Request body:', requestBody);
         console.log('Script URL:', GOOGLE_SHEETS_CONFIG.scriptUrl);
 
+        // Use a method that doesn't trigger CORS preflight
         const response = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain', // Use text/plain to avoid preflight
             },
             body: requestBody
         });
