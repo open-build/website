@@ -4,31 +4,68 @@
 function doPost(e) {
   try {
     console.log('=== doPost START ===');
-    console.log('Full event object:', JSON.stringify(e, null, 2));
+    console.log('Event object type:', typeof e);
+    console.log('Full event object:', JSON.stringify(e || {}, null, 2));
 
     // Check if event object exists
     if (!e) {
       console.error('CRITICAL: Event object is completely undefined');
-      return ContentService
+      console.log('This usually means deployment configuration issue');
+      const response = ContentService
         .createTextOutput(JSON.stringify({
           success: false,
-          error: 'Event object is undefined - check script deployment'
+          error: 'Event object is undefined - check script deployment permissions',
+          debug: 'doPost was called but event parameter is undefined'
         }))
         .setMimeType(ContentService.MimeType.JSON);
+      
+      try {
+        response.setHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+        });
+      } catch (headerError) {
+        console.log('Could not set headers:', headerError);
+      }
+      
+      return response;
     }
 
     console.log('Event exists, checking postData...');
+    console.log('Event keys:', Object.keys(e));
 
     // Check if postData exists
     if (!e.postData) {
       console.error('CRITICAL: postData is undefined');
       console.log('Available event properties:', Object.keys(e));
-      return ContentService
+      console.log('Event.parameter:', e.parameter);
+      console.log('Event.parameters:', e.parameters);
+      
+      const response = ContentService
         .createTextOutput(JSON.stringify({
           success: false,
-          error: 'No postData received - check request format'
+          error: 'No postData received - check request format',
+          debug: {
+            eventKeys: Object.keys(e),
+            eventType: typeof e,
+            parameter: e.parameter,
+            parameters: e.parameters
+          }
         }))
         .setMimeType(ContentService.MimeType.JSON);
+        
+      try {
+        response.setHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+        });
+      } catch (headerError) {
+        console.log('Could not set headers:', headerError);
+      }
+      
+      return response;
     }
 
     console.log('postData exists, checking contents...');
@@ -185,51 +222,98 @@ function doGet(e) {
     console.log('=== doGet START ===');
     console.log('doGet called with event:', e);
     console.log('Event type:', typeof e);
+    console.log('Event exists:', !!e);
 
     const params = e ? e.parameter : {};
     console.log('Parameters:', params);
 
     // Simple health check
     if (params.health === 'check') {
-      return ContentService
+      const response = ContentService
         .createTextOutput(JSON.stringify({
           success: true,
           message: 'Google Apps Script is healthy',
           timestamp: new Date().toISOString(),
-          version: '2.0',
-          functions: ['doPost', 'doGet', 'doOptions']
+          version: '2.1',
+          functions: ['doPost', 'doGet', 'doOptions'],
+          eventReceived: !!e,
+          parametersReceived: params
         }))
         .setMimeType(ContentService.MimeType.JSON);
+        
+      try {
+        response.setHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+        });
+      } catch (headerError) {
+        console.log('Could not set headers in doGet:', headerError);
+      }
+      
+      return response;
     }
 
     // If test parameter is provided, return a simple test response
     if (params.test === 'true') {
-      return ContentService
+      const response = ContentService
         .createTextOutput(JSON.stringify({
           success: true,
           message: 'Test successful',
           timestamp: new Date().toISOString(),
-          spreadsheetId: '1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM'
+          spreadsheetId: '1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM',
+          eventReceived: !!e,
+          debug: {
+            eventKeys: e ? Object.keys(e) : [],
+            parameters: params
+          }
         }))
         .setMimeType(ContentService.MimeType.JSON);
+        
+      try {
+        response.setHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+        });
+      } catch (headerError) {
+        console.log('Could not set headers in doGet test:', headerError);
+      }
+      
+      return response;
     }
 
-    return ContentService
+    const response = ContentService
       .createTextOutput(JSON.stringify({
         success: true,
         message: 'Open Build Form Handler is running',
         timestamp: new Date().toISOString(),
         method: 'GET',
         parameters: params,
-        instructions: 'Use ?test=true for testing or ?health=check for health check'
+        instructions: 'Use ?test=true for testing or ?health=check for health check',
+        eventReceived: !!e
       }))
       .setMimeType(ContentService.MimeType.JSON);
+      
+    try {
+      response.setHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+      });
+    } catch (headerError) {
+      console.log('Could not set headers in doGet default:', headerError);
+    }
+    
+    return response;
+    
   } catch (error) {
     console.error('doGet error:', error);
     return ContentService
       .createTextOutput(JSON.stringify({
         success: false,
-        error: 'doGet error: ' + error.toString()
+        error: 'doGet error: ' + error.toString(),
+        timestamp: new Date().toISOString()
       }))
       .setMimeType(ContentService.MimeType.JSON);
   }
