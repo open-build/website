@@ -14,12 +14,7 @@ function doPost(e) {
           success: false,
           error: 'Event object is undefined - check script deployment'
         }))
-        .setMimeType(ContentService.MimeType.JSON)
-        .setHeaders({
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-        });
+        .setMimeType(ContentService.MimeType.JSON);
     }
 
     console.log('Event exists, checking postData...');
@@ -33,12 +28,7 @@ function doPost(e) {
           success: false,
           error: 'No postData received - check request format'
         }))
-        .setMimeType(ContentService.MimeType.JSON)
-        .setHeaders({
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-        });
+        .setMimeType(ContentService.MimeType.JSON);
     }
 
     console.log('postData exists, checking contents...');
@@ -52,12 +42,7 @@ function doPost(e) {
           success: false,
           error: 'No content in postData - check request body'
         }))
-        .setMimeType(ContentService.MimeType.JSON)
-        .setHeaders({
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-        });
+        .setMimeType(ContentService.MimeType.JSON);
     }
 
     console.log('Contents exists, parsing JSON...');
@@ -161,31 +146,37 @@ function doPost(e) {
     sendEmailNotification(sheetName, formData);
 
     // Return success response
-    return ContentService
+    const response = ContentService
       .createTextOutput(JSON.stringify({
         success: true,
         message: 'Data submitted successfully'
       }))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-      });
+      .setMimeType(ContentService.MimeType.JSON);
+    
+    response.setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+    });
+    
+    return response;
 
   } catch (error) {
     console.error('Error:', error);
-    return ContentService
+    const errorResponse = ContentService
       .createTextOutput(JSON.stringify({
         success: false,
         error: error.toString()
       }))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-      });
+      .setMimeType(ContentService.MimeType.JSON);
+      
+    errorResponse.setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+    });
+    
+    return errorResponse;
   }
 }
 
@@ -251,25 +242,18 @@ function doOptions(e) {
     console.log('Handling CORS preflight request');
 
     // Handle CORS preflight requests
-    return ContentService
-      .createTextOutput('')
-      .setMimeType(ContentService.MimeType.TEXT)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
-        'Access-Control-Max-Age': '86400'
-      });
+    const response = ContentService.createTextOutput('');
+    response.setMimeType(ContentService.MimeType.TEXT);
+    response.setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+      'Access-Control-Max-Age': '86400'
+    });
+    return response;
   } catch (error) {
     console.error('doOptions error:', error);
-    return ContentService
-      .createTextOutput('')
-      .setMimeType(ContentService.MimeType.TEXT)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-      });
+    return ContentService.createTextOutput('').setMimeType(ContentService.MimeType.TEXT);
   }
 }
 
