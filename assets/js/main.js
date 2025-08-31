@@ -32,11 +32,13 @@ function initializeTheme() {
     setTheme(savedTheme);
 
     // Theme toggle event listener
-    themeToggle.addEventListener('click', function() {
-        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-    });
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    }
 }
 
 // Theme management
@@ -47,12 +49,12 @@ function setTheme(theme) {
     
     if (theme === 'dark') {
         html.classList.add('dark');
-        themeIcon.classList.add('hidden');
-        themeIconDark.classList.remove('hidden');
+        if (themeIcon) themeIcon.classList.add('hidden');
+        if (themeIconDark) themeIconDark.classList.remove('hidden');
     } else {
         html.classList.remove('dark');
-        themeIcon.classList.remove('hidden');
-        themeIconDark.classList.add('hidden');
+        if (themeIcon) themeIcon.classList.remove('hidden');
+        if (themeIconDark) themeIconDark.classList.add('hidden');
     }
     
     localStorage.setItem('theme', theme);

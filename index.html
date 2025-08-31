@@ -18,15 +18,25 @@
     
     <!-- Tailwind CSS v4 Browser -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        // Basic dark mode configuration for Tailwind v4
+        if (typeof window !== 'undefined') {
+            // Check for saved theme or default to light
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        }
+    </script>
     
     <!-- Main CSS (after Tailwind) -->
     <link rel="stylesheet" href="assets/css/main.css">
     <!-- Custom Animations CSS (after Tailwind) -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="font-['Inter'] bg-white text-gray-900 transition-colors duration-300">
+<body class="font-['Inter'] bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
     <!-- Navigation -->
-    <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 fixed w-full z-50 transition-colors duration-300">
+    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 fixed w-full z-50 transition-colors duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <img src="assets/img/OPEN-BUILD-LOGO.png" alt="Open Build Logo" class="h-10 w-auto">
@@ -37,8 +47,14 @@
             </div>
             
             <div class="flex items-center space-x-4">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                    <i id="theme-icon-dark" class="fas fa-sun hidden"></i>
+                </button>
+                
                 <!-- Mobile menu button -->
-                <button class="p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors md:hidden" id="mobile-menu-btn">
+                <button class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors md:hidden" id="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
                 
