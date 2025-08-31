@@ -2,13 +2,13 @@
 
 // Google Sheets configuration
 const GOOGLE_SHEETS_CONFIG = {
-    // Google Apps Script Web App URL
+    // Google Apps Script Web App URL - UPDATE THIS WITH YOUR NEW DEPLOYMENT URL
     scriptUrl: 'https://script.google.com/macros/s/AKfycbwmuP5Ou5NasZ_RP9wm4sHDgUTsYnI6vJCFyyADRaHIiz87DM6EtwQPCwy4w0F8m_vX/exec',
     sheetId: '1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM'
 };
 
 // DOM Elements
-const navbar = document.getElementById('navbar');
+const navbar = document.querySelector('nav'); // Changed from getElementById('navbar')
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 const themeToggle = document.getElementById('theme-toggle');
@@ -61,26 +61,32 @@ function setTheme(theme) {
 // Navigation functionality
 function initializeNavigation() {
     // Mobile menu toggle
-    mobileMenuBtn.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-    });
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
 
     // Navbar scroll effect
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
 
     // Close mobile menu when clicking on links
-    const mobileLinks = mobileMenu.querySelectorAll('a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
+    if (mobileMenu) {
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
         });
-    });
+    }
 }
 
 // Smooth scrolling for anchor links
@@ -238,11 +244,14 @@ async function submitToGoogleSheets(data, sheetName) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errorText = await response.text();
+            console.error('Response error text:', errorText);
+            throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
         }
 
         const result = await response.json();
-        
+        console.log('Response result:', result);
+
         if (result.error) {
             throw new Error(result.error);
         }
@@ -481,12 +490,42 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Performance monitoring
-window.addEventListener('load', function() {
-    // Log performance metrics
-    if ('performance' in window) {
-        const perfData = performance.getEntriesByType('navigation')[0];
-        console.log('Page load time:', perfData.loadEventEnd - perfData.fetchStart);
+// Test Google Apps Script connection
+async function testGoogleAppsScript() {
+    try {
+        console.log('Testing Google Apps Script connection...');
+
+        const response = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
+            method: 'GET'
+        });
+
+        const result = await response.json();
+        console.log('Test result:', result);
+        alert('Google Apps Script is working! Response: ' + JSON.stringify(result));
+    } catch (error) {
+        console.error('Test failed:', error);
+        alert('Google Apps Script test failed: ' + error.message);
+    }
+}
+
+// Add test button to page (for debugging)
+document.addEventListener('DOMContentLoaded', function() {
+    // Add test button for debugging (remove in production)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        const testButton = document.createElement('button');
+        testButton.textContent = 'Test Google Apps Script';
+        testButton.style.position = 'fixed';
+        testButton.style.bottom = '20px';
+        testButton.style.right = '20px';
+        testButton.style.zIndex = '9999';
+        testButton.style.padding = '10px';
+        testButton.style.background = '#4285f4';
+        testButton.style.color = 'white';
+        testButton.style.border = 'none';
+        testButton.style.borderRadius = '5px';
+        testButton.style.cursor = 'pointer';
+        testButton.onclick = testGoogleAppsScript;
+        document.body.appendChild(testButton);
     }
 });
 

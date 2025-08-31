@@ -50,19 +50,57 @@ A modern, responsive website for Open Build - Software Development Training & Me
 3. Set execute as: "Me"
 4. Set access: "Anyone"
 5. Click "Deploy"
-6. Copy the web app URL
+6. **Important**: Copy the web app URL (it should look like: `https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec`)
 
 #### Step 3: Update Website Configuration
 
 1. Open `assets/js/main.js`
-2. Replace `YOUR_SCRIPT_ID` in the `GOOGLE_SHEETS_CONFIG` with your web app URL
-3. Commit and push changes
+2. Find the `GOOGLE_SHEETS_CONFIG` object
+3. Replace the entire `scriptUrl` value with your web app URL:
+   ```javascript
+   const GOOGLE_SHEETS_CONFIG = {
+       scriptUrl: 'https://script.google.com/macros/s/YOUR_ACTUAL_SCRIPT_ID/exec',
+       sheetId: 'YOUR_GOOGLE_SHEETS_ID'
+   };
+   ```
+4. Commit and push changes
+
+#### Troubleshooting Google Sheets Integration
+
+**Common Issues:**
+
+1. **"Google Apps Script URL not configured" error**
+   - Make sure you've replaced `YOUR_NEW_SCRIPT_ID` with your actual script ID
+   - The URL should be: `https://script.google.com/macros/s/[SCRIPT_ID]/exec`
+
+2. **CORS errors**
+   - The Google Apps Script has been updated with proper CORS headers
+   - Make sure the script is deployed as a web app with "Anyone" access
+
+3. **Form submissions not working**
+   - Check browser console for error messages
+   - Test the Google Apps Script URL directly in a browser
+   - Verify the Google Sheets ID is correct
+
+4. **Testing the integration**
+   - A test button appears in the bottom-right corner for debugging
+   - Check browser console for detailed error messages
+   - Forms will fallback to email if Google Sheets fails
+
+**Debug Steps:**
+
+1. Open browser developer tools (F12)
+2. Go to Console tab
+3. Try submitting a form
+4. Look for error messages starting with "Google Sheets submission error"
+5. Check the Network tab for failed requests
 
 #### Step 4: Set Up Google Sheets
 
 1. Create a new Google Sheets document
-2. Copy the sheet ID from the URL
-3. The script will automatically create tabs and headers when first form is submitted
+2. Copy the sheet ID from the URL (the long string between `/d/` and `/edit`)
+3. Update the `sheetId` in `assets/js/main.js`
+4. The script will automatically create tabs and headers when first form is submitted
 
 ### 3. Customization
 
