@@ -5,7 +5,6 @@ const CACHE_NAME = 'open-build-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/assets/css/main.css',
   '/assets/css/style.css',
   '/assets/js/main.js',
   'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
