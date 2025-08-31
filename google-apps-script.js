@@ -3,18 +3,88 @@
 
 function doPost(e) {
   try {
+    // Log the incoming request for debugging
+    console.log('doPost called with event:', e);
+    console.log('Event type:', typeof e);
+    console.log('Event properties:', Object.keys(e || {}));
+
+    // Check if event object exists
+    if (!e) {
+      console.error('Event object is undefined');
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: false,
+          error: 'Event object is undefined'
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Check if postData exists
+    if (!e.postData) {
+      console.error('postData is undefined');
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: false,
+          error: 'No postData received'
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Check if contents exists
+    if (!e.postData.contents) {
+      console.error('postData.contents is undefined or empty');
+      console.log('postData:', e.postData);
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: false,
+          error: 'No content in postData'
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    console.log('Raw postData contents:', e.postData.contents);
+
     // Parse the request
-    const data = JSON.parse(e.postData.contents);
+    let data;
+    try {
+      data = JSON.parse(e.postData.contents);
+      console.log('Parsed data:', data);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError);
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: false,
+          error: 'Invalid JSON in request body: ' + parseError.toString()
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     const sheetName = data.sheetName;
     const formData = data.data;
 
+    // Validate required fields
+    if (!sheetName || !formData) {
+      console.error('Missing required fields:', { sheetName, formData });
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: false,
+          error: 'Missing sheetName or formData. Received: ' + JSON.stringify(data)
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // Open the spreadsheet
+    console.log('Opening spreadsheet...');
     const spreadsheet = SpreadsheetApp.openById('1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM');
+    console.log('Spreadsheet opened successfully');
 
     // Get or create the sheet
+    console.log('Getting/creating sheet:', sheetName);
     let sheet = spreadsheet.getSheetByName(sheetName);
     if (!sheet) {
+      console.log('Sheet does not exist, creating new sheet');
       sheet = spreadsheet.insertSheet(sheetName);
+      console.log('New sheet created');
 
       // Add headers based on sheet type
       if (sheetName === 'contacts') {
@@ -32,6 +102,8 @@ function doPost(e) {
       headerRange.setFontWeight('bold');
       headerRange.setBackground('#4285f4');
       headerRange.setFontColor('white');
+    } else {
+      console.log('Existing sheet found');
     }
 
     // Prepare row data based on sheet type
@@ -89,12 +161,42 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  return ContentService
-    .createTextOutput(JSON.stringify({
-      message: 'Open Build Form Handler is running',
-      timestamp: new Date().toISOString()
-    }))
-    .setMimeType(ContentService.MimeType.JSON);
+  try {
+    console.log('doGet called with event:', e);
+
+    const params = e ? e.parameter : {};
+    console.log('Parameters:', params);
+
+    // If test parameter is provided, return a simple test response
+    if (params.test === 'true') {
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: true,
+          message: 'Test successful',
+          timestamp: new Date().toISOString(),
+          spreadsheetId: '1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM'
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: true,
+        message: 'Open Build Form Handler is running',
+        timestamp: new Date().toISOString(),
+        method: 'GET',
+        parameters: params
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    console.error('doGet error:', error);
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: false,
+        error: 'doGet error: ' + error.toString()
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
 function doOptions(e) {

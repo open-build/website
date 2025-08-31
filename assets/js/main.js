@@ -232,104 +232,60 @@ async function handleApplicationSubmission(form) {
 
 // Submit data to Google Sheets
 async function submitToGoogleSheets(data, sheetName) {
+    console.log('submitToGoogleSheets called with:', { data, sheetName });
+
     try {
-        // Create form data for Google Apps Script
-        const formData = new FormData();
-        formData.append('sheetName', sheetName);
-        formData.append('data', JSON.stringify(data));
+        const requestBody = JSON.stringify({
+            sheetName: sheetName,
+            data: data
+        });
+
+        console.log('Request body:', requestBody);
+        console.log('Script URL:', GOOGLE_SHEETS_CONFIG.scriptUrl);
 
         const response = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: requestBody
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Response error text:', errorText);
-            throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+        console.log('Response status:', response.status);
+        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
+        const responseText = await response.text();
+        console.log('Raw response text:', responseText);
+
+        let result;
+        try {
+            result = JSON.parse(responseText);
+            console.log('Parsed response:', result);
+        } catch (parseError) {
+            console.error('Failed to parse response as JSON:', parseError);
+            throw new Error(`Invalid JSON response: ${responseText}`);
         }
 
-        const result = await response.json();
-        console.log('Response result:', result);
-
-        if (result.error) {
-            throw new Error(result.error);
+        if (!result.success) {
+            throw new Error(result.error || 'Unknown error from server');
         }
 
         return result;
     } catch (error) {
         console.error('Google Sheets submission error:', error);
-        
-        // Fallback: try JSONP approach
-        try {
-            return await submitViaJSONP(data, sheetName);
-        } catch (jsonpError) {
-            console.error('JSONP fallback failed:', jsonpError);
-            
-            // Final fallback: open mailto
-            const subject = encodeURIComponent(`Open Build ${data.type || 'Contact'} - ${data.name}`);
-            const body = encodeURIComponent(JSON.stringify(data, null, 2));
-            const mailtoLink = `mailto:contact@open.build?subject=${subject}&body=${body}`;
-            
-            // Show user the mailto option
-            if (confirm('There was an issue submitting your form online. Would you like to send it via email instead?')) {
-                window.open(mailtoLink);
-            }
-            
-            throw error;
+
+        // Fallback: open mailto
+        const subject = encodeURIComponent(`Open Build ${data.type || 'Contact'} - ${data.name}`);
+        const body = encodeURIComponent(JSON.stringify(data, null, 2));
+        const mailtoLink = `mailto:contact@open.build?subject=${subject}&body=${body}`;
+
+        // Show user the mailto option
+        if (confirm('There was an issue submitting your form online. Would you like to send it via email instead?')) {
+            window.open(mailtoLink);
         }
-    }
-}
 
-// JSONP fallback for CORS issues
-function submitViaJSONP(data, sheetName) {
-    return new Promise((resolve, reject) => {
-        const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
-        
-        // Create script element
-        const script = document.createElement('script');
-        const params = new URLSearchParams({
-            callback: callbackName,
-            sheetName: sheetName,
-            data: JSON.stringify(data)
-        });
-        
-        script.src = `${GOOGLE_SHEETS_CONFIG.scriptUrl}?${params.toString()}`;
-        
-        // Set up callback
-        window[callbackName] = function(response) {
-            delete window[callbackName];
-            document.body.removeChild(script);
-            
-            if (response.success) {
-                resolve(response);
-            } else {
-                reject(new Error(response.error || 'Unknown error'));
-            }
-        };
-        
-        // Handle errors
-        script.onerror = function() {
-            delete window[callbackName];
-            document.body.removeChild(script);
-            reject(new Error('JSONP request failed'));
-        };
-        
-        // Add script to page
-        document.body.appendChild(script);
-        
-        // Timeout after 10 seconds
-        setTimeout(() => {
-            if (window[callbackName]) {
-                delete window[callbackName];
-                document.body.removeChild(script);
-                reject(new Error('Request timeout'));
-            }
-        }, 10000);
-    });
-}
-
-// Modal functions
+        throw error;
+    }// Modal functions
 function openApplicationForm(type) {
     const modal = document.getElementById('application-modal');
     const modalTitle = document.getElementById('modal-title');
@@ -508,10 +464,10 @@ async function testGoogleAppsScript() {
     }
 }
 
-// Add test button to page (for debugging)
-document.addEventListener('DOMContentLoaded', function() {
-    // Add test button for debugging (remove in production)
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+// Test Google Apps Script connection (only in development)
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    // Add test button for debugging
+    document.addEventListener('DOMContentLoaded', function() {
         const testButton = document.createElement('button');
         testButton.textContent = 'Test Google Apps Script';
         testButton.style.position = 'fixed';
@@ -526,8 +482,60 @@ document.addEventListener('DOMContentLoaded', function() {
         testButton.style.cursor = 'pointer';
         testButton.onclick = testGoogleAppsScript;
         document.body.appendChild(testButton);
+    });
+}
+
+// Test Google Apps Script connection
+async function testGoogleAppsScript() {
+    try {
+        console.log('Testing Google Apps Script connection...');
+        console.log('Script URL:', GOOGLE_SHEETS_CONFIG.scriptUrl);
+
+        // First test GET request
+        console.log('Testing GET request...');
+        const getResponse = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl + '?test=true', {
+            method: 'GET'
+        });
+
+        console.log('GET Response status:', getResponse.status);
+        const getResult = await getResponse.json();
+        console.log('GET Test result:', getResult);
+
+        if (!getResult.success) {
+            throw new Error('GET test failed: ' + JSON.stringify(getResult));
+        }
+
+        // Now test POST request with minimal data
+        console.log('Testing POST request...');
+        const testData = {
+            type: 'test',
+            name: 'Test User',
+            email: 'test@example.com',
+            timestamp: new Date().toISOString(),
+            source: 'test'
+        };
+
+        const postResponse = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sheetName: 'test',
+                data: testData
+            })
+        });
+
+        console.log('POST Response status:', postResponse.status);
+        const postResult = await postResponse.json();
+        console.log('POST Test result:', postResult);
+
+        alert('Google Apps Script tests completed!\n\nGET: ' + JSON.stringify(getResult) + '\n\nPOST: ' + JSON.stringify(postResult));
+    } catch (error) {
+        console.error('Test failed:', error);
+        alert('Google Apps Script test failed: ' + error.message + '\n\nMake sure:\n1. The script is deployed as a web app\n2. "Execute as: Me" and "Who has access: Anyone"\n3. The script URL in main.js is correct');
     }
-});
+}
 
 // Service Worker registration (for offline functionality)
 if ('serviceWorker' in navigator) {
