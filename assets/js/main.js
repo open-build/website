@@ -285,7 +285,10 @@ async function submitToGoogleSheets(data, sheetName) {
         }
 
         throw error;
-    }// Modal functions
+    }
+}
+
+// Modal functions
 function openApplicationForm(type) {
     const modal = document.getElementById('application-modal');
     const modalTitle = document.getElementById('modal-title');
@@ -445,24 +448,6 @@ document.addEventListener('click', function(e) {
         });
     }
 });
-
-// Test Google Apps Script connection
-async function testGoogleAppsScript() {
-    try {
-        console.log('Testing Google Apps Script connection...');
-
-        const response = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
-            method: 'GET'
-        });
-
-        const result = await response.json();
-        console.log('Test result:', result);
-        alert('Google Apps Script is working! Response: ' + JSON.stringify(result));
-    } catch (error) {
-        console.error('Test failed:', error);
-        alert('Google Apps Script test failed: ' + error.message);
-    }
-}
 
 // Test Google Apps Script connection (only in development)
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
