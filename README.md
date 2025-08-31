@@ -106,19 +106,14 @@ A modern, responsive website for Open Build - Software Development Training & Me
 
 #### Colors & Branding
 
-Edit the Tailwind config in `index.html`:
-```javascript
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                primary: '#2563eb',      // Change primary color
-                secondary: '#7c3aed',    // Change secondary color
-                accent: '#06b6d4',       // Change accent color
-            }
-        }
-    }
-}
+#### Colors & Branding
+
+With Tailwind CSS v4, colors are managed through standard utility classes. The site uses:
+- **Primary**: `bg-blue-600`, `text-blue-600`, `border-blue-600`
+- **Secondary**: `bg-purple-600`, `text-purple-600`, `border-purple-600`  
+- **Accent**: `bg-cyan-600`, `text-cyan-600`, `border-cyan-600`
+
+To customize colors, simply replace these utility classes in `index.html` with your preferred Tailwind color variants.
 ```
 
 #### Content Updates

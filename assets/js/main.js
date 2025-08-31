@@ -444,8 +444,8 @@ document.addEventListener('click', function(e) {
         });
     }
     
-    // Track CTA buttons
-    if (target.classList.contains('bg-primary') || target.classList.contains('bg-secondary')) {
+    // Track CTA buttons (updated for Tailwind v4 colors)
+    if (target.classList.contains('bg-blue-600') || target.classList.contains('bg-purple-600') || target.classList.contains('bg-cyan-600')) {
         trackEvent('cta_click', {
             text: text,
             section: target.closest('section')?.id || 'unknown'
