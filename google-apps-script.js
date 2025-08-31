@@ -183,37 +183,23 @@ function doPost(e) {
     sendEmailNotification(sheetName, formData);
 
     // Return success response
-    const response = ContentService
+    return ContentService
       .createTextOutput(JSON.stringify({
         success: true,
-        message: 'Data submitted successfully'
+        message: 'Data submitted successfully',
+        timestamp: new Date().toISOString()
       }))
       .setMimeType(ContentService.MimeType.JSON);
-    
-    response.setHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-    });
-    
-    return response;
 
   } catch (error) {
     console.error('Error:', error);
-    const errorResponse = ContentService
+    return ContentService
       .createTextOutput(JSON.stringify({
         success: false,
-        error: error.toString()
+        error: error.toString(),
+        timestamp: new Date().toISOString()
       }))
       .setMimeType(ContentService.MimeType.JSON);
-      
-    errorResponse.setHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
-    });
-    
-    return errorResponse;
   }
 }
 

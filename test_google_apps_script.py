@@ -9,7 +9,7 @@ import requests
 import sys
 
 # Configuration
-SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgkN6jRIufmhfmqdRy7FrzWYenq74SIYLkuEwqOvOmUb3cOwnEYniAu2UEi8j4RMM-/exec"
+SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMVEw3eCleo3R5fwhZKGa3aELdN160qU5ELOnzj5dEbUXC6fAg9iinrbsTI3jbxydr/exec"
 SPREADSHEET_ID = "1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM"
 
 def test_health_check():

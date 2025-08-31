@@ -2,8 +2,8 @@
 
 // Google Sheets configuration
 const GOOGLE_SHEETS_CONFIG = {
-    // Google Apps Script Web App URL - Updated with new deployment
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbwgkN6jRIufmhfmqdRy7FrzWYenq74SIYLkuEwqOvOmUb3cOwnEYniAu2UEi8j4RMM-/exec',
+    // Google Apps Script Web App URL - Updated with latest deployment
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbyMVEw3eCleo3R5fwhZKGa3aELdN160qU5ELOnzj5dEbUXC6fAg9iinrbsTI3jbxydr/exec',
     sheetId: '1Zu_Ij0vG8Q_ebdjdeFVGY8cDaqyrKIXMoY9qwsgY3JM'
 };
 
