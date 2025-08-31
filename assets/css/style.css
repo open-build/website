@@ -53,15 +53,15 @@
 }
 
 .animate-float {
-    animation: float 8s infinite ease-in-out;
+    animation: float 8s infinite ease-in-out !important;
 }
 
 .animate-code-drift {
-    animation: code-drift 12s infinite ease-in-out;
+    animation: code-drift 12s infinite ease-in-out !important;
 }
 
 .animate-tetris {
-    animation: tetris-fall 15s infinite linear;
+    animation: tetris-fall 15s infinite linear !important;
 }
 
 .animation-delay-1000 {
