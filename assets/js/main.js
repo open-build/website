@@ -311,6 +311,7 @@ function openApplicationForm(type) {
     }
     
     modal.classList.remove('hidden');
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
@@ -342,6 +343,7 @@ function openContactForm(planType) {
 function closeModal() {
     const modal = document.getElementById('application-modal');
     modal.classList.add('hidden');
+    modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     
     // Reset form
