@@ -460,3 +460,31 @@ function sendToSlack(sheetName, formData) {
     console.error('Error sending to Slack:', error);
   }
 }
+
+// Trigger function for when rows are added directly to sheets
+function sendEmailRow(e) {
+  try {
+    const sh = e.source.getActiveSheet();
+    const sheetName = sh.getName();
+    
+    // Only process specific sheets and row insertions
+    if ((sheetName === 'contacts' || sheetName === 'applications') && e.changeType === 'INSERT_ROW') {
+      
+      // Get the newly added row data
+      const range = e.range;
+      const row = range.getRow();
+      const values = sh.getRange(row, 1, 1, sh.getLastColumn()).getValues()[0];
+      
+      // Send email notification
+      MailApp.sendEmail({
+        to: "contact@open.build",
+        subject: `New ${sheetName} submission - Row ${row}`,
+        body: `A new row has been added to the ${sheetName} sheet.\n\nRow ${row} data: ${values.join(', ')}\n\nCheck the spreadsheet for details.`
+      });
+      
+      console.log(`Email sent for new row in ${sheetName} sheet`);
+    }
+  } catch (error) {
+    console.error('Error in sendEmailRow trigger:', error);
+  }
+}

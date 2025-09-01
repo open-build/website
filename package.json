@@ -24,8 +24,6 @@
   "author": "Open Build",
   "license": "MIT",
   "homepage": "https://yourusername.github.io/open-build-new-website",
-  "devDependencies": {},
-  "dependencies": {},
   "engines": {
     "node": ">=14.0.0"
   }

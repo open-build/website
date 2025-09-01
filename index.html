@@ -16,8 +16,20 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Tailwind CSS v4 Browser -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tailwind CSS v3 (Production Ready) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <script>
         // Basic dark mode configuration for Tailwind v4
         if (typeof window !== 'undefined') {
@@ -32,13 +44,13 @@
     <!-- Custom Animations CSS (after Tailwind) -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="font-['Inter'] bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+<body class="font-['Inter'] bg-white dark:bg-gray-900 dark:bg-gray-900 text-gray-900 dark:text-white dark:text-white transition-colors duration-300">
     <!-- Navigation -->
-    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 fixed w-full z-50 transition-colors duration-300">
+    <nav class="bg-white dark:bg-gray-900/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 dark:border-gray-700 fixed w-full z-50 transition-colors duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <img src="assets/img/OPEN-BUILD-LOGO.png" alt="Open Build Logo" class="h-10 w-auto">
-                <div class="text-sm text-gray-600 leading-tight">
+                <div class="text-sm text-gray-600 dark:text-gray-300 leading-tight">
                     <div>AI Software Development</div>
                     <div>Training & Mentorship</div>
                 </div>
@@ -46,39 +58,39 @@
             
             <div class="flex items-center space-x-4">
                 <!-- Theme Toggle Button -->
-                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 dark:bg-gray-800 text-gray-600 dark:text-gray-300 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                     <i id="theme-icon" class="fas fa-moon"></i>
                     <i id="theme-icon-dark" class="fas fa-sun hidden"></i>
                 </button>
                 
                 <!-- Mobile menu button -->
-                <button class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors md:hidden" id="mobile-menu-btn">
+                <button class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 dark:bg-gray-800 text-gray-600 dark:text-gray-300 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors md:hidden" id="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
                 
                 <!-- Desktop navigation -->
                 <ul class="hidden md:flex space-x-8">
-                    <li><a href="#home" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a></li>
-                    <li><a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors">About</a></li>
-                    <li><a href="#services" class="text-gray-600 hover:text-blue-600 transition-colors">Services</a></li>
-                    <li><a href="#pricing" class="text-gray-600 hover:text-blue-600 transition-colors">Pricing</a></li>
-                    <li><a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</a></li>
+                    <li><a href="#home" class="text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a></li>
+                    <li><a href="#about" class="text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a></li>
+                    <li><a href="#services" class="text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a></li>
+                    <li><a href="#pricing" class="text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Pricing</a></li>
+                    <li><a href="#contact" class="text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a></li>
                 </ul>
             </div>
         </div>
         
         <!-- Mobile navigation -->
-        <div class="hidden px-6 pb-4 border-t border-gray-200" id="mobile-menu">
-            <a href="#home" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">Home</a>
-            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">About</a>
-            <a href="#services" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">Services</a>
-            <a href="#pricing" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">Pricing</a>
-            <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+        <div class="hidden px-6 pb-4 border-t border-gray-200 dark:border-gray-700 dark:border-gray-700 bg-white dark:bg-gray-900 dark:bg-gray-900" id="mobile-menu">
+            <a href="#home" class="block py-2 text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
+            <a href="#about" class="block py-2 text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
+            <a href="#services" class="block py-2 text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a>
+            <a href="#pricing" class="block py-2 text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Pricing</a>
+            <a href="#contact" class="block py-2 text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center pt-20 overflow-hidden transition-colors duration-300">
+    <section id="home" class="relative min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center pt-20 overflow-hidden transition-colors duration-300">
         <!-- Background Animation -->
         <div class="absolute inset-0 opacity-10 overflow-hidden">
             <!-- Code Brackets -->
@@ -114,11 +126,11 @@
         </div>
         
         <div class="container mx-auto px-6 text-center relative z-10">
-            <h1 class="text-6xl md:text-8xl font-bold text-gray-900 mb-6">Open Build</h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-6 max-w-3xl mx-auto">
+            <h1 class="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white dark:text-white mb-6">Open Build</h1>
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
                 Professional software development training and services for open source developers
             </p>
-            <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p class="text-lg text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
                 Learn modern development practices, get expert mentorship, and build your career with our comprehensive training programs and services.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -133,37 +145,37 @@
         
         <!-- Scroll indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-2xl text-gray-600"></i>
+            <i class="fas fa-chevron-down text-2xl text-gray-600 dark:text-gray-300 dark:text-gray-400"></i>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-white transition-colors duration-300">
+    <section id="services" class="py-20 bg-white dark:bg-gray-900 dark:bg-gray-900 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Services</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive training and development programs designed to accelerate your software development career</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white dark:text-white mb-4">Our Services</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 dark:text-gray-300 max-w-2xl mx-auto">Comprehensive training and development programs designed to accelerate your software development career</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Junior Developer Program -->
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div class="bg-gray-50 dark:bg-gray-800 dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                     <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mb-6">
                         <i class="fas fa-graduation-cap text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Junior Developer Program</h3>
-                    <p class="text-gray-600 mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white dark:text-white mb-4">Junior Developer Program</h3>
+                    <p class="text-gray-600 dark:text-gray-300 dark:text-gray-300 mb-6">
                         Perfect for students and newly trained developers looking to gain real-world experience, 
                         learn industry tools, and develop teamwork skills in a supportive environment.
                     </p>
                     <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-blue-600 mr-3"></i> Hands-on project experience
                         </li>
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-blue-600 mr-3"></i> Mentorship from senior developers
                         </li>
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-blue-600 mr-3"></i> Industry-standard tools training
                         </li>
                     </ul>
@@ -173,23 +185,23 @@
                 </div>
                 
                 <!-- Mentorship Program -->
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div class="bg-gray-50 dark:bg-gray-800 dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                     <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-xl flex items-center justify-center mb-6">
                         <i class="fas fa-users text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Become a Mentor</h3>
-                    <p class="text-gray-600 mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white dark:text-white mb-4">Become a Mentor</h3>
+                    <p class="text-gray-600 dark:text-gray-300 dark:text-gray-300 mb-6">
                         Join our volunteer mentorship program and make a lasting impact on the next generation of developers. 
                         Build connections and grow your leadership skills.
                     </p>
                     <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-purple-600 mr-3"></i> Flexible volunteer positions
                         </li>
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-purple-600 mr-3"></i> Professional development
                         </li>
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-purple-600 mr-3"></i> Networking opportunities
                         </li>
                     </ul>
@@ -199,23 +211,23 @@
                 </div>
                 
                 <!-- Corporate Training -->
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div class="bg-gray-50 dark:bg-gray-800 dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                     <div class="w-16 h-16 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl flex items-center justify-center mb-6">
                         <i class="fas fa-building text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Corporate Training</h3>
-                    <p class="text-gray-600 mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white dark:text-white mb-4">Corporate Training</h3>
+                    <p class="text-gray-600 dark:text-gray-300 dark:text-gray-300 mb-6">
                         Affordable training solutions for organizations looking to upskill their development teams 
                         and implement robust junior developer programs.
                     </p>
                     <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-cyan-600 mr-3"></i> Custom training programs
                         </li>
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-cyan-600 mr-3"></i> Team development workshops
                         </li>
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-gray-600 dark:text-gray-300 dark:text-gray-300">
                             <i class="fas fa-check text-cyan-600 mr-3"></i> Ongoing support
                         </li>
                     </ul>
@@ -228,7 +240,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50 transition-colors duration-300">
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800 dark:bg-gray-800 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
@@ -238,8 +250,8 @@
                     <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-8">
                         <i class="fas fa-heart text-white text-3xl"></i>
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Ethical AI & Open Source</h2>
-                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Ethical AI & Open Source</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         We're proud to be part of the Standards Body for AI Fairness and Inclusivity, working to ensure 
                         AI and ML models are free from gender and cultural biases. Our commitment to ethical technology 
                         drives everything we do.
@@ -249,22 +261,22 @@
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-blue-600 text-xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">AI Fairness Research</h4>
-                                <p class="text-gray-600">Contributing to robust evaluation standards for bias-free AI development</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">AI Fairness Research</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Contributing to robust evaluation standards for bias-free AI development</p>
                             </div>
                         </div>
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-blue-600 text-xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">Open Source Commitment</h4>
-                                <p class="text-gray-600">Building and maintaining repositories that benefit the entire developer community</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Open Source Commitment</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Building and maintaining repositories that benefit the entire developer community</p>
                             </div>
                         </div>
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-blue-600 text-xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">Industry Certification</h4>
-                                <p class="text-gray-600">Helping companies achieve recognition for ethical AI practices</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Industry Certification</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Helping companies achieve recognition for ethical AI practices</p>
                             </div>
                         </div>
                     </div>
@@ -275,16 +287,16 @@
                 </div>
                 
                 <div class="relative">
-                    <div class="bg-white p-8 rounded-2xl shadow-xl">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Partnership Network</h3>
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-xl">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Partnership Network</h3>
                         <div class="space-y-6">
                             <div class="flex items-center space-x-4">
                                 <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                                     <img src="assets/img/buildly-rabbit-square-transparent.png" alt="Buildly" class="w-8 h-8">
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">Buildly Collaboration</h4>
-                                    <p class="text-gray-600 text-sm">Visit <a href="https://collab.buildly.io" target="_blank" class="text-blue-600 hover:underline">collab.buildly.io</a> for our collaboration hub</p>
+                                    <h4 class="font-semibold text-gray-900 dark:text-white">Buildly Collaboration</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">Visit <a href="https://collab.buildly.io" target="_blank" class="text-blue-600 hover:underline">collab.buildly.io</a> for our collaboration hub</p>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-4">
@@ -292,8 +304,8 @@
                                     <i class="fas fa-rocket text-white"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">First City Foundry</h4>
-                                    <p class="text-gray-600 text-sm">Startup support at <a href="https://firstcityfoundry.com" target="_blank" class="text-purple-600 hover:underline">firstcityfoundry.com</a></p>
+                                    <h4 class="font-semibold text-gray-900 dark:text-white">First City Foundry</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">Startup support at <a href="https://firstcityfoundry.com" target="_blank" class="text-purple-600 hover:underline">firstcityfoundry.com</a></p>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-4">
@@ -301,8 +313,8 @@
                                     <i class="fas fa-trophy text-white"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">Get Motivated Buddies</h4>
-                                    <p class="text-gray-600 text-sm">Bug bounty program partnership for skill development</p>
+                                    <h4 class="font-semibold text-gray-900 dark:text-white">Get Motivated Buddies</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">Bug bounty program partnership for skill development</p>
                                 </div>
                             </div>
                         </div>
@@ -313,21 +325,21 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-white transition-colors duration-300">
+    <section id="pricing" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Transparent Pricing</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Affordable solutions designed to fit every budget and organization size</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Transparent Pricing</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Affordable solutions designed to fit every budget and organization size</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- Individual Plan -->
-                <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:border-blue-600 transition-all duration-300">
+                <div class="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-8 hover:border-blue-600 transition-all duration-300">
                     <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Individual</h3>
-                        <p class="text-gray-600 mb-4">Perfect for solo developers</p>
-                        <div class="text-4xl font-bold text-gray-900">Free</div>
-                        <p class="text-gray-600">Get started today</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Individual</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Perfect for solo developers</p>
+                        <div class="text-4xl font-bold text-gray-900 dark:text-white">Free</div>
+                        <p class="text-gray-600 dark:text-gray-300">Get started today</p>
                     </div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-3"></i> Access to open source resources</li>
@@ -335,28 +347,28 @@
                         <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-3"></i> Basic training materials</li>
                         <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-3"></i> Junior program application</li>
                     </ul>
-                    <button onclick="openApplicationForm('individual')" class="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+                    <button onclick="openApplicationForm('individual')" class="w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
                         Apply Now
                     </button>
                 </div>
                 
                 <!-- Startup Plan -->
-                <div class="bg-white border-2 border-blue-600 rounded-2xl p-8 relative transform scale-105 shadow-xl">
+                <div class="bg-white dark:bg-gray-900 border-2 border-blue-600 rounded-2xl p-8 relative transform scale-105 shadow-xl">
                     <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
                         Most Popular
                     </div>
                     <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Startup</h3>
-                        <p class="text-gray-600 mb-4">Ideal for small teams</p>
-                        <div class="text-4xl font-bold text-gray-900">$999<span class="text-lg text-gray-600">/month</span></div>
-                        <p class="text-gray-600">Billed monthly</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Startup</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Ideal for small teams</p>
+                        <div class="text-4xl font-bold text-gray-900 dark:text-white">$999<span class="text-lg text-gray-600 dark:text-gray-300">/month</span></div>
+                        <p class="text-gray-600 dark:text-gray-300">Billed monthly</p>
                     </div>
                     <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-gray-600"><i class="fas fa-check text-blue-600 mr-3"></i> Everything in Individual</li>
-                        <li class="flex items-center text-gray-600"><i class="fas fa-check text-blue-600 mr-3"></i> Up to 5 team members</li>
-                        <li class="flex items-center text-gray-600"><i class="fas fa-check text-blue-600 mr-3"></i> Dedicated mentor support</li>
-                        <li class="flex items-center text-gray-600"><i class="fas fa-check text-blue-600 mr-3"></i> Custom training modules</li>
-                        <li class="flex items-center text-gray-600"><i class="fas fa-check text-blue-600 mr-3"></i> Priority support</li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300"><i class="fas fa-check text-blue-600 mr-3"></i> Everything in Individual</li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300"><i class="fas fa-check text-blue-600 mr-3"></i> Up to 5 team members</li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300"><i class="fas fa-check text-blue-600 mr-3"></i> Dedicated mentor support</li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300"><i class="fas fa-check text-blue-600 mr-3"></i> Custom training modules</li>
+                        <li class="flex items-center text-gray-600 dark:text-gray-300"><i class="fas fa-check text-blue-600 mr-3"></i> Priority support</li>
                     </ul>
                     <button onclick="openContactForm('startup')" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                         Get Started
@@ -364,12 +376,12 @@
                 </div>
                 
                 <!-- Enterprise Plan -->
-                <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:border-blue-600 transition-all duration-300">
+                <div class="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-8 hover:border-blue-600 transition-all duration-300">
                     <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
-                        <p class="text-gray-600 mb-4">For large organizations</p>
-                        <div class="text-4xl font-bold text-gray-900">Custom</div>
-                        <p class="text-gray-600">Contact for pricing</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Enterprise</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">For large organizations</p>
+                        <div class="text-4xl font-bold text-gray-900 dark:text-white">Custom</div>
+                        <p class="text-gray-600 dark:text-gray-300">Contact for pricing</p>
                     </div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-3"></i> Everything in Startup</li>
@@ -378,7 +390,7 @@
                         <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-3"></i> Custom integration support</li>
                         <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-3"></i> 24/7 dedicated support</li>
                     </ul>
-                    <button onclick="openContactForm('enterprise')" class="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+                    <button onclick="openContactForm('enterprise')" class="w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
                         Contact Sales
                     </button>
                 </div>
@@ -387,22 +399,22 @@
     </section>
 
     <!-- Application Section -->
-    <section id="apply" class="py-20 bg-gradient-to-br from-blue-50 to-purple-50 transition-colors duration-300">
+    <section id="apply" class="py-20 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Join Our Community</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Whether you're looking to learn, teach, or grow your team, we have a place for you</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Join Our Community</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Whether you're looking to learn, teach, or grow your team, we have a place for you</p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <!-- Developer Application -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg">
                     <div class="text-center mb-6">
                         <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-code text-white text-2xl"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">For Developers</h3>
-                        <p class="text-gray-600">Join our junior program or become a mentor</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">For Developers</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Join our junior program or become a mentor</p>
                     </div>
                     <button onclick="openApplicationForm('developer')" class="w-full bg-blue-600 text-white px-6 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
                         Apply as Developer
@@ -410,13 +422,13 @@
                 </div>
                 
                 <!-- Organization Application -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg">
                     <div class="text-center mb-6">
                         <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-xl flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-building text-white text-2xl"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">For Organizations</h3>
-                        <p class="text-gray-600">Get training and development services</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">For Organizations</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Get training and development services</p>
                     </div>
                     <button onclick="openContactForm('organization')" class="w-full bg-purple-600 text-white px-6 py-4 rounded-lg text-lg font-semibold hover:bg-purple-700 transition-colors">
                         Contact Us
@@ -427,11 +439,11 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-100 text-gray-900 transition-colors duration-300">
+    <section id="contact" class="py-20 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h2>
-                <p class="text-xl text-gray-500 max-w-2xl mx-auto">Ready to start your journey? We'd love to hear from you</p>
+                <p class="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">Ready to start your journey? We'd love to hear from you</p>
             </div>
             
             <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -444,7 +456,7 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold">Email</h4>
-                                <p class="text-gray-500">contact@open.build</p>
+                                <p class="text-gray-500 dark:text-gray-400">contact@open.build</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
@@ -453,7 +465,7 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold">Website</h4>
-                                <p class="text-gray-500">open.build</p>
+                                <p class="text-gray-500 dark:text-gray-400">open.build</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
@@ -462,7 +474,7 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold">GitHub</h4>
-                                <p class="text-gray-500">Follow our open source projects</p>
+                                <p class="text-gray-500 dark:text-gray-400">Follow our open source projects</p>
                             </div>
                         </div>
                     </div>
@@ -470,29 +482,29 @@
                     <div class="mt-8 pt-8 border-t border-gray-700">
                         <h4 class="font-semibold mb-4">Quick Links</h4>
                         <div class="grid grid-cols-2 gap-4">
-                            <a href="https://collab.buildly.io" target="_blank" class="text-gray-500 hover:text-blue-600 transition-colors">
+                            <a href="https://collab.buildly.io" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 transition-colors">
                                 <i class="fas fa-external-link-alt mr-2"></i>Buildly Collaboration Hub
                             </a>
-                            <a href="https://firstcityfoundry.com" target="_blank" class="text-gray-500 hover:text-blue-600 transition-colors">
+                            <a href="https://firstcityfoundry.com" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 transition-colors">
                                 <i class="fas fa-external-link-alt mr-2"></i>First City Foundry
                             </a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-white/5 backdrop-blur-sm p-8 rounded-2xl">
+                <div class="bg-white dark:bg-gray-900/5 backdrop-blur-sm p-8 rounded-2xl">
                     <form id="contact-form" class="space-y-6">
                         <div>
                             <label for="name" class="block text-sm font-medium mb-2">Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:border-blue-600 focus:outline-none text-white placeholder-gray-400">
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-white dark:bg-gray-900/10 border border-white/20 rounded-lg focus:border-blue-600 focus:outline-none text-white placeholder-gray-400">
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:border-blue-600 focus:outline-none text-white placeholder-gray-400">
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-white dark:bg-gray-900/10 border border-white/20 rounded-lg focus:border-blue-600 focus:outline-none text-white placeholder-gray-400">
                         </div>
                         <div>
                             <label for="subject" class="block text-sm font-medium mb-2">Subject</label>
-                            <select id="subject" name="subject" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:border-blue-600 focus:outline-none text-white">
+                            <select id="subject" name="subject" required class="w-full px-4 py-3 bg-white dark:bg-gray-900/10 border border-white/20 rounded-lg focus:border-blue-600 focus:outline-none text-white">
                                 <option value="">Select a topic</option>
                                 <option value="general">General Inquiry</option>
                                 <option value="junior-program">Junior Developer Program</option>
@@ -503,7 +515,7 @@
                         </div>
                         <div>
                             <label for="message" class="block text-sm font-medium mb-2">Message</label>
-                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:border-blue-600 focus:outline-none text-white placeholder-gray-400"></textarea>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-white dark:bg-gray-900/10 border border-white/20 rounded-lg focus:border-blue-600 focus:outline-none text-white placeholder-gray-400"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-blue-600 text-white px-6 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
                             Send Message
@@ -521,19 +533,19 @@
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
                         <img src="assets/img/logo.png" alt="Open Build Logo" class="w-8 h-8">
-                        <div class="text-sm text-gray-500 leading-tight">
+                        <div class="text-sm text-gray-500 dark:text-gray-400 leading-tight">
                             <div>AI Software Development</div>
                             <div>Training & Mentorship</div>
                         </div>
                     </div>
-                    <p class="text-gray-500 text-sm">
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">
                         Empowering developers through training, mentorship, and ethical open source development.
                     </p>
                 </div>
                 
                 <div>
                     <h4 class="font-semibold mb-4">Services</h4>
-                    <ul class="space-y-2 text-sm text-gray-500">
+                    <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
                         <li><a href="#services" class="hover:text-blue-600 transition-colors">Junior Developer Program</a></li>
                         <li><a href="#services" class="hover:text-blue-600 transition-colors">Mentorship</a></li>
                         <li><a href="#services" class="hover:text-blue-600 transition-colors">Corporate Training</a></li>
@@ -543,7 +555,7 @@
                 
                 <div>
                     <h4 class="font-semibold mb-4">Partners</h4>
-                    <ul class="space-y-2 text-sm text-gray-500">
+                    <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
                         <li><a href="https://collab.buildly.io" target="_blank" class="hover:text-blue-600 transition-colors">Buildly Collaboration</a></li>
                         <li><a href="https://firstcityfoundry.com" target="_blank" class="hover:text-blue-600 transition-colors">First City Foundry</a></li>
                         <li><a href="https://www.getmotivatedbuddies.com" target="_blank" class="hover:text-blue-600 transition-colors">Get Motivated Buddies</a></li>
@@ -566,7 +578,7 @@
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500 dark:text-gray-400">
                 <p>&copy; 2025 Open Build. All rights reserved. | Built with ❤️ for the developer community</p>
             </div>
         </div>
@@ -574,11 +586,11 @@
 
     <!-- Application Modal -->
     <div id="application-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden z-50 flex items-center justify-center p-4" style="display: none;">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             <div class="p-8">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 id="modal-title" class="text-2xl font-bold text-gray-900">Developer Application</h3>
-                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <h3 id="modal-title" class="text-2xl font-bold text-gray-900 dark:text-white">Developer Application</h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 dark:text-gray-300">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
@@ -588,18 +600,18 @@
                     
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label for="app-name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                            <input type="text" id="app-name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none">
+                            <label for="app-name" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Full Name</label>
+                            <input type="text" id="app-name" name="name" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-600 focus:outline-none">
                         </div>
                         <div>
-                            <label for="app-email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" id="app-email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none">
+                            <label for="app-email" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Email</label>
+                            <input type="email" id="app-email" name="email" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-600 focus:outline-none">
                         </div>
                     </div>
                     
                     <div>
-                        <label for="app-experience" class="block text-sm font-medium text-gray-700 mb-2">Experience Level</label>
-                        <select id="app-experience" name="experience" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none">
+                        <label for="app-experience" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Experience Level</label>
+                        <select id="app-experience" name="experience" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-600 focus:outline-none">
                             <option value="">Select your experience level</option>
                             <option value="beginner">Beginner (0-1 years)</option>
                             <option value="junior">Junior (1-3 years)</option>
@@ -609,18 +621,18 @@
                     </div>
                     
                     <div>
-                        <label for="app-skills" class="block text-sm font-medium text-gray-700 mb-2">Technical Skills</label>
-                        <textarea id="app-skills" name="skills" rows="3" placeholder="List your programming languages, frameworks, and tools..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none"></textarea>
+                        <label for="app-skills" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Technical Skills</label>
+                        <textarea id="app-skills" name="skills" rows="3" placeholder="List your programming languages, frameworks, and tools..." class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-600 focus:outline-none"></textarea>
                     </div>
                     
                     <div>
-                        <label for="app-motivation" class="block text-sm font-medium text-gray-700 mb-2">Why do you want to join Open Build?</label>
-                        <textarea id="app-motivation" name="motivation" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none"></textarea>
+                        <label for="app-motivation" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Why do you want to join Open Build?</label>
+                        <textarea id="app-motivation" name="motivation" rows="4" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-600 focus:outline-none"></textarea>
                     </div>
                     
                     <div>
-                        <label for="app-github" class="block text-sm font-medium text-gray-700 mb-2">GitHub Profile (Optional)</label>
-                        <input type="url" id="app-github" name="github" placeholder="https://github.com/username" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none">
+                        <label for="app-github" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">GitHub Profile (Optional)</label>
+                        <input type="url" id="app-github" name="github" placeholder="https://github.com/username" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-600 focus:outline-none">
                     </div>
                     
                     <button type="submit" class="w-full bg-blue-600 text-white px-6 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">

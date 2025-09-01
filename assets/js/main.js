@@ -234,16 +234,11 @@ async function handleApplicationSubmission(form) {
 
 // Submit data to Google Sheets
 async function submitToGoogleSheets(data, sheetName) {
-    console.log('submitToGoogleSheets called with:', { data, sheetName });
-
     try {
         const requestBody = JSON.stringify({
             sheetName: sheetName,
             data: data
         });
-
-        console.log('Request body:', requestBody);
-        console.log('Script URL:', GOOGLE_SHEETS_CONFIG.scriptUrl);
 
         // Use a method that doesn't trigger CORS preflight
         const response = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
@@ -254,18 +249,12 @@ async function submitToGoogleSheets(data, sheetName) {
             body: requestBody
         });
 
-        console.log('Response status:', response.status);
-        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
         const responseText = await response.text();
-        console.log('Raw response text:', responseText);
 
         let result;
         try {
             result = JSON.parse(responseText);
-            console.log('Parsed response:', result);
         } catch (parseError) {
-            console.error('Failed to parse response as JSON:', parseError);
             throw new Error(`Invalid JSON response: ${responseText}`);
         }
 
@@ -409,9 +398,6 @@ function trackEvent(eventName, properties = {}) {
     if (typeof gtag !== 'undefined') {
         gtag('event', eventName, properties);
     }
-    
-    // Console log for development
-    console.log('Event tracked:', eventName, properties);
 }
 
 // Track form submissions
@@ -454,88 +440,15 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Test Google Apps Script connection (only in development)
-if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    // Add test button for debugging
-    document.addEventListener('DOMContentLoaded', function() {
-        const testButton = document.createElement('button');
-        testButton.textContent = 'Test Google Apps Script';
-        testButton.style.position = 'fixed';
-        testButton.style.bottom = '20px';
-        testButton.style.right = '20px';
-        testButton.style.zIndex = '9999';
-        testButton.style.padding = '10px';
-        testButton.style.background = '#4285f4';
-        testButton.style.color = 'white';
-        testButton.style.border = 'none';
-        testButton.style.borderRadius = '5px';
-        testButton.style.cursor = 'pointer';
-        testButton.onclick = testGoogleAppsScript;
-        document.body.appendChild(testButton);
-    });
-}
-
-// Test Google Apps Script connection
-async function testGoogleAppsScript() {
-    try {
-        console.log('Testing Google Apps Script connection...');
-        console.log('Script URL:', GOOGLE_SHEETS_CONFIG.scriptUrl);
-
-        // First test GET request
-        console.log('Testing GET request...');
-        const getResponse = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl + '?test=true', {
-            method: 'GET'
-        });
-
-        console.log('GET Response status:', getResponse.status);
-        const getResult = await getResponse.json();
-        console.log('GET Test result:', getResult);
-
-        if (!getResult.success) {
-            throw new Error('GET test failed: ' + JSON.stringify(getResult));
-        }
-
-        // Now test POST request with minimal data
-        console.log('Testing POST request...');
-        const testData = {
-            type: 'test',
-            name: 'Test User',
-            email: 'test@example.com',
-            timestamp: new Date().toISOString(),
-            source: 'test'
-        };
-
-        const postResponse = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                sheetName: 'test',
-                data: testData
-            })
-        });
-
-        console.log('POST Response status:', postResponse.status);
-        const postResult = await postResponse.json();
-        console.log('POST Test result:', postResult);
-
-        alert('Google Apps Script tests completed!\n\nGET: ' + JSON.stringify(getResult) + '\n\nPOST: ' + JSON.stringify(postResult));
-    } catch (error) {
-        console.error('Test failed:', error);
-        alert('Google Apps Script test failed: ' + error.message + '\n\nMake sure:\n1. The script is deployed as a web app\n2. "Execute as: Me" and "Who has access: Anyone"\n3. The script URL in main.js is correct');
-    }
-}
-
 // Service Worker registration (for offline functionality)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js')
             .then(function(registration) {
-                console.log('ServiceWorker registration successful');
+                // ServiceWorker registered successfully
             })
             .catch(function(err) {
-                console.log('ServiceWorker registration failed');
+                // ServiceWorker registration failed
             });
     });
 }
