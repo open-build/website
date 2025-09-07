@@ -1,0 +1,31 @@
+# GitHub Pages configuration
+theme: minima
+title: "Open Build Developer Portfolio"
+description: "Professional portfolio powered by Open Build"
+
+# Enable GitHub Pages
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# SEO and social
+author: "Open Build Developer"
+twitter:
+  username: openbuild
+social:
+  name: "Open Build"
+  links:
+    - https://github.com/open-build
+    - https://open.build
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude from build
+exclude:
+  - README.md
+  - COPILOT-GUIDE.md
+  - docs/
+  - .gitignore
+  - Gemfile*
