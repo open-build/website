@@ -1,0 +1,55 @@
+{
+  "email": {
+    "smtp_host": "${BREVO_SMTP_HOST}",
+    "smtp_port": "${BREVO_SMTP_PORT}",
+    "smtp_user": "${BREVO_SMTP_USER}",
+    "smtp_password": "${BREVO_SMTP_PASSWORD}",
+    "from_email": "${FROM_EMAIL}",
+    "from_name": "${FROM_NAME}",
+    "reply_to": "${REPLY_TO_EMAIL}"
+  },
+  "limits": {
+    "daily_emails": 15,
+    "contacts_per_org": 4,
+    "cooldown_days": 30,
+    "delay_between_emails": [60, 120],
+    "delay_between_requests": [30, 60]
+  },
+  "discovery": {
+    "targets_per_run": 10,
+    "sources_per_category": 2,
+    "max_urls_per_source": 5
+  },
+  "target_categories": {
+    "startup": {
+      "priority": 3,
+      "description": "Early-stage companies needing developer training"
+    },
+    "startup_publications": {
+      "priority": 2,
+      "description": "Media outlets covering startup ecosystem"
+    },
+    "influencer": {
+      "priority": 2,
+      "description": "Developer community leaders and content creators"
+    },
+    "community": {
+      "priority": 2,
+      "description": "Developer communities and organizations"
+    },
+    "platform": {
+      "priority": 1,
+      "description": "Developer platforms and tools"
+    }
+  },
+  "message_personalization": {
+    "use_ai": false,
+    "openai_api_key": "",
+    "personalization_level": "basic"
+  },
+  "reporting": {
+    "daily_reports": true,
+    "weekly_summaries": true,
+    "monthly_analytics": true
+  }
+}
