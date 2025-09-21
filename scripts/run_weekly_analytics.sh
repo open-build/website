@@ -92,10 +92,10 @@ Week Ending: {datetime.now().strftime('%Y-%m-%d')}
 '''
     
     automation.email_sender.send_email(
-        'team@open.build', 
+        os.getenv('TEAM_EMAIL', 'team@open.build'), 
         subject, 
         message, 
-        'greg@open.build,greg@buildly.io'
+        os.getenv('BCC_EMAILS', 'greg@open.build,greg@buildly.io')
     )
     print('Weekly analytics report sent successfully')
 

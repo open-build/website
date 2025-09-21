@@ -83,8 +83,8 @@ load_dotenv()
 try:
     msg = MIMEMultipart()
     msg['From'] = f\"{os.getenv('FROM_NAME', 'Open Build System')} <{os.getenv('FROM_EMAIL', 'team@open.build')}>\"
-    msg['To'] = 'team@open.build'
-    msg['Bcc'] = 'greg@open.build,greg@buildly.io'
+    msg['To'] = os.getenv('TEAM_EMAIL', 'team@open.build')
+    msg['Bcc'] = os.getenv('BCC_EMAILS', 'greg@open.build,greg@buildly.io')
     msg['Subject'] = '❌ Open Build Outreach Automation - Cron Job Failed'
     
     message = f'''❌ Open Build Outreach Automation - Cron Job Failure
@@ -116,7 +116,7 @@ Open Build Outreach Automation System
     server.starttls()
     server.login(os.getenv('BREVO_SMTP_USER'), os.getenv('BREVO_SMTP_PASSWORD'))
     
-    recipients = ['team@open.build', 'greg@open.build', 'greg@buildly.io']
+    recipients = [os.getenv('TEAM_EMAIL', 'team@open.build')] + os.getenv('BCC_EMAILS', 'greg@open.build,greg@buildly.io').split(',')
     text = msg.as_string()
     server.sendmail(os.getenv('FROM_EMAIL'), recipients, text)
     server.quit()
