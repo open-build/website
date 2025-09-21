@@ -1319,6 +1319,25 @@ class OutreachAutomation:
                     if success:
                         # Update database
                         self.db_manager.update_contact_status(target.url)
+                        
+                        # Log the outreach attempt
+                        conn_log = sqlite3.connect(self.db_manager.db_path)
+                        cursor_log = conn_log.cursor()
+                        
+                        # Get target ID for logging
+                        cursor_log.execute("SELECT id FROM targets WHERE url = ?", (target.url,))
+                        target_result = cursor_log.fetchone()
+                        if target_result:
+                            target_id = target_result[0]
+                            cursor_log.execute("""
+                                INSERT INTO outreach_log 
+                                (target_id, subject, message_template, status, created_at)
+                                VALUES (?, ?, ?, ?, ?)
+                            """, (target_id, subject, 'automated_outreach', 'sent', datetime.now().isoformat()))
+                            conn_log.commit()
+                        
+                        conn_log.close()
+                        
                         targets_contacted.append(target)
                         stats['emails_sent'] += 1
                         
