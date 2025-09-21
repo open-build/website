@@ -1245,12 +1245,13 @@ class OutreachAutomation:
             return obj
     
     def _record_daily_stats(self, stats: Dict, responses: List, sources: List):
-        """Record daily statistics in the database"""
+        """Record daily statistics in the database and clean old data"""
         conn = sqlite3.connect(self.db_manager.db_path)
         cursor = conn.cursor()
         
         today = datetime.now().strftime('%Y-%m-%d')
         
+        # Record today's stats
         cursor.execute("""
             INSERT OR REPLACE INTO daily_stats 
             (date, new_targets_found, emails_sent, responses_received, total_targets)
@@ -1263,9 +1264,18 @@ class OutreachAutomation:
             self._get_total_targets()
         ))
         
+        # Clean old data (keep only last 30 days)
+        cutoff_date = (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d')
+        cutoff_datetime = (datetime.now() - timedelta(days=30)).isoformat()
+        
+        cursor.execute("DELETE FROM daily_stats WHERE date < ?", (cutoff_date,))
+        cursor.execute("DELETE FROM outreach_log WHERE created_at < ?", (cutoff_datetime,))
+        cursor.execute("DELETE FROM responses WHERE created_at < ?", (cutoff_datetime,))
+        cursor.execute("DELETE FROM analytics_tracking WHERE date < ?", (cutoff_date,))
+        
         conn.commit()
         conn.close()
-        logger.info(f"Recorded daily stats: {stats}")
+        logger.info(f"Recorded daily stats and cleaned old data: {stats}")
     
     def _get_total_targets(self) -> int:
         """Get total number of targets in database"""

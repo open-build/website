@@ -19,7 +19,7 @@ fi
 echo "$(date): Starting Open Build daily outreach automation..." >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/cron.log"
 
 # Run the automation with proper error handling
-"/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" "/Users/greglind/Projects/open-build/open-build-new-website/outreach_automation.py" --run >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/daily_automation.log" 2>> "/Users/greglind/Projects/open-build/open-build-new-website/logs/daily_automation_errors.log"
+"/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" "/Users/greglind/Projects/open-build/open-build-new-website/scripts/outreach_automation.py" --run >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/daily_automation.log" 2>> "/Users/greglind/Projects/open-build/open-build-new-website/logs/daily_automation_errors.log"
 
 # Check exit status
 if [ $? -eq 0 ]; then

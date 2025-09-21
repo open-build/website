@@ -6,10 +6,11 @@
 echo "🚀 Setting up Open Build Outreach Automation Cron Jobs"
 echo "=" * 60
 
-# Get the current directory (where the script is located)
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Get the current directory (parent of scripts folder)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPTS_DIR="$SCRIPT_DIR/scripts"
 PYTHON_PATH="$SCRIPT_DIR/.venv/bin/python"
-AUTOMATION_SCRIPT="$SCRIPT_DIR/outreach_automation.py"
+AUTOMATION_SCRIPT="$SCRIPTS_DIR/outreach_automation.py"
 LOG_DIR="$SCRIPT_DIR/logs"
 
 # Create logs directory if it doesn't exist
@@ -34,7 +35,7 @@ if [ ! -f "$AUTOMATION_SCRIPT" ]; then
 fi
 
 # Create the cron script that will be executed
-CRON_SCRIPT="$SCRIPT_DIR/run_daily_automation.sh"
+CRON_SCRIPT="$SCRIPTS_DIR/run_daily_automation.sh"
 
 echo "📝 Creating daily automation script..."
 

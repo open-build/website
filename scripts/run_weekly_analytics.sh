@@ -19,12 +19,12 @@ fi
 echo "$(date): Starting Open Build weekly analytics report..." >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/cron.log"
 
 # Generate weekly report
-"/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" "/Users/greglind/Projects/open-build/open-build-new-website/outreach_automation.py" --report >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/weekly_analytics.log" 2>> "/Users/greglind/Projects/open-build/open-build-new-website/logs/weekly_analytics_errors.log"
+"/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" "/Users/greglind/Projects/open-build/open-build-new-website/scripts/outreach_automation.py" --report >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/weekly_analytics.log" 2>> "/Users/greglind/Projects/open-build/open-build-new-website/logs/weekly_analytics_errors.log"
 
 # Send comprehensive weekly analytics email
 "/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" -c "
 import sys
-sys.path.append('/Users/greglind/Projects/open-build/open-build-new-website')
+sys.path.append('/Users/greglind/Projects/open-build/open-build-new-website/scripts')
 from outreach_automation import OutreachAutomation
 import asyncio
 from datetime import datetime, timedelta

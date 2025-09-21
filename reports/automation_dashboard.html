@@ -1,0 +1,644 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Build Automation Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header .subtitle {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .card.success { border-left-color: #27ae60; }
+        .card.warning { border-left-color: #f39c12; }
+        .card.error { border-left-color: #e74c3c; }
+        
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .metric:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-value {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-indicator.green { background: #27ae60; }
+        .status-indicator.yellow { background: #f39c12; }
+        .status-indicator.red { background: #e74c3c; }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .log-section {
+            margin: 30px 0;
+        }
+        
+        .log-tabs {
+            display: flex;
+            border-bottom: 2px solid #ecf0f1;
+            margin-bottom: 20px;
+        }
+        
+        .log-tab {
+            padding: 10px 20px;
+            background: #ecf0f1;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .log-tab.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .log-content {
+            display: none;
+        }
+        
+        .log-content.active {
+            display: block;
+        }
+        
+        .log-box {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .env-section {
+            margin: 30px 0;
+        }
+        
+        .env-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .env-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #ecf0f1;
+        }
+        
+        .env-item.configured { border-left-color: #27ae60; }
+        .env-item.missing { border-left-color: #e74c3c; }
+        
+        .timestamp {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .env-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Open Build Automation Dashboard</h1>
+            <div class="subtitle">Real-time monitoring and configuration status</div>
+        </div>
+        
+        <div class="content">
+            <!-- Summary Cards -->
+            <div class="dashboard-grid">
+                <div class="card success">
+                    <h3>📊 Overall Status</h3>
+                    <div class="metric">
+                        <span>Total Targets</span>
+                        <span class="metric-value">13</span>
+                    </div>
+                    <div class="metric">
+                        <span>Targets Contacted</span>
+                        <span class="metric-value">13</span>
+                    </div>
+                    <div class="metric">
+                        <span>Ready for Outreach</span>
+                        <span class="metric-value">0</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>📅 Last 7 Days</h3>
+                    <div class="metric">
+                        <span>New Targets</span>
+                        <span class="metric-value">9</span>
+                    </div>
+                    <div class="metric">
+                        <span>Emails Sent</span>
+                        <span class="metric-value">9</span>
+                    </div>
+                    <div class="metric">
+                        <span>Responses</span>
+                        <span class="metric-value">0</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>📅 Last 30 Days</h3>
+                    <div class="metric">
+                        <span>New Targets</span>
+                        <span class="metric-value">9</span>
+                    </div>
+                    <div class="metric">
+                        <span>Emails Sent</span>
+                        <span class="metric-value">9</span>
+                    </div>
+                    <div class="metric">
+                        <span>Responses</span>
+                        <span class="metric-value">0</span>
+                    </div>
+                </div>
+                
+                <div class="card success">
+                    <h3>⚙️ Configuration Status</h3>
+                    <div class="metric">
+                        <span>Required Settings</span>
+                        <span class="metric-value">
+                            <span class="status-indicator green"></span>
+                            6/6
+                        </span>
+                    </div>
+                    <div class="metric">
+                        <span>Optional Features</span>
+                        <span class="metric-value">
+                            <span class="status-indicator green"></span>
+                            1/8
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Target Categories -->
+            <div class='card'><h3>🎯 Targets by Category</h3>
+            <div class='metric'><span>Startup</span><span class='metric-value'>7</span></div><div class='metric'><span>Community</span><span class='metric-value'>4</span></div><div class='metric'><span>Startup_Publications</span><span class='metric-value'>1</span></div><div class='metric'><span>Influencer</span><span class='metric-value'>1</span></div>
+            </div>
+            
+            <!-- Daily Stats Table -->
+            <div class="table-container">
+                <h3 style="margin-bottom: 15px;">📈 Daily Activity (Last 30 Days)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>New Targets</th>
+                            <th>Emails Sent</th>
+                            <th>Responses</th>
+                            <th>Total Targets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>2025-09-21</td>
+                            <td>9</td>
+                            <td>9</td>
+                            <td>0</td>
+                            <td>13</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Recent Outreach -->
+
+            <!-- Environment Configuration -->
+            <div class="env-section">
+                <h3>⚙️ Environment Configuration</h3>
+                <div class="env-grid">
+                    <div class="card">
+                        <h4>✅ Required Settings (Configured)</h4>
+
+                        <div class="env-item configured">
+                            <div>
+                                <strong>BREVO_SMTP_HOST</strong><br>
+                                <small>Email server configuration</small>
+                            </div>
+                            <span>✓ smtp-relay.brevo.com</span>
+                        </div>
+
+                        <div class="env-item configured">
+                            <div>
+                                <strong>BREVO_SMTP_USER</strong><br>
+                                <small>Email authentication</small>
+                            </div>
+                            <span>✓ 96af72001@smtp-brevo.com</span>
+                        </div>
+
+                        <div class="env-item configured">
+                            <div>
+                                <strong>BREVO_SMTP_PASSWORD</strong><br>
+                                <small>Email authentication</small>
+                            </div>
+                            <span>✓ [CONFIGURED]</span>
+                        </div>
+
+                        <div class="env-item configured">
+                            <div>
+                                <strong>FROM_EMAIL</strong><br>
+                                <small>Sender email address</small>
+                            </div>
+                            <span>✓ team@open.build</span>
+                        </div>
+
+                        <div class="env-item configured">
+                            <div>
+                                <strong>FROM_NAME</strong><br>
+                                <small>Sender display name</small>
+                            </div>
+                            <span>✓ Open Build Foundry Team</span>
+                        </div>
+
+                        <div class="env-item configured">
+                            <div>
+                                <strong>REPLY_TO_EMAIL</strong><br>
+                                <small>Reply-to email address</small>
+                            </div>
+                            <span>✓ team@open.build</span>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <h4>❌ Required Settings (Missing)</h4>
+
+                        <div class="env-item configured">
+                            <div>All required settings are configured!</div>
+                            <span>✅</span>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="env-grid" style="margin-top: 20px;">
+                    <div class="card">
+                        <h4>🔧 Optional Features (Configured)</h4>
+
+                        <div class="env-item configured">
+                            <div>
+                                <strong>GITHUB_REPO</strong><br>
+                                <small>GitHub repository tracking</small>
+                            </div>
+                            <span>✓ open-build/website</span>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <h4>⚠️ Optional Features (Available)</h4>
+
+                        <div class="env-item missing">
+                            <div>
+                                <strong>GOOGLE_ANALYTICS_API_KEY</strong><br>
+                                <small>Website analytics tracking</small>
+                            </div>
+                            <span>○ Available</span>
+                        </div>
+
+                        <div class="env-item missing">
+                            <div>
+                                <strong>GOOGLE_ANALYTICS_VIEW_ID</strong><br>
+                                <small>Website analytics tracking</small>
+                            </div>
+                            <span>○ Available</span>
+                        </div>
+
+                        <div class="env-item missing">
+                            <div>
+                                <strong>YOUTUBE_API_KEY</strong><br>
+                                <small>YouTube analytics tracking</small>
+                            </div>
+                            <span>○ Available</span>
+                        </div>
+
+                        <div class="env-item missing">
+                            <div>
+                                <strong>YOUTUBE_CHANNEL_ID</strong><br>
+                                <small>YouTube analytics tracking</small>
+                            </div>
+                            <span>○ Available</span>
+                        </div>
+
+                        <div class="env-item missing">
+                            <div>
+                                <strong>OPENAI_API_KEY</strong><br>
+                                <small>Enhanced personalization</small>
+                            </div>
+                            <span>○ Available</span>
+                        </div>
+
+                        <div class="env-item missing">
+                            <div>
+                                <strong>SLACK_WEBHOOK_URL</strong><br>
+                                <small>Slack notifications</small>
+                            </div>
+                            <span>○ Available</span>
+                        </div>
+
+                        <div class="env-item missing">
+                            <div>
+                                <strong>DISCORD_WEBHOOK_URL</strong><br>
+                                <small>Discord notifications</small>
+                            </div>
+                            <span>○ Available</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Log Files Section -->
+            <div class="log-section">
+                <h3>📋 System Logs</h3>
+                <div class="log-tabs">
+<button class="log-tab active" onclick="showLog('cron.log')">Cron Job Execution Log</button><button class="log-tab " onclick="showLog('daily_automation.log')">Daily Automation Output</button><button class="log-tab " onclick="showLog('daily_automation_errors.log')">Daily Automation Errors</button><button class="log-tab " onclick="showLog('weekly_analytics.log')">Weekly Analytics Output</button><button class="log-tab " onclick="showLog('weekly_analytics_errors.log')">Weekly Analytics Errors</button>
+                </div>
+
+                <div id="cron.log" class="log-content active">
+                    <div style="margin-bottom: 10px;">
+                        <strong>File:</strong> logs/cron.log | 
+                        <strong>Size:</strong> 1105 bytes | 
+                        <strong>Modified:</strong> 2025-09-21 09:09:16
+                    </div>
+                    <div class="log-box">Fri Sep 19 12:17:32 PDT 2025: Starting Open Build daily outreach automation...
+Fri Sep 19 12:25:32 PDT 2025: Daily automation completed successfully
+Fri Sep 19 12:25:32 PDT 2025: Cron job execution completed
+Sat Sep 20 09:00:01 PDT 2025: Starting Open Build daily outreach automation...
+Sat Sep 20 09:08:53 PDT 2025: Daily automation completed successfully
+Sat Sep 20 09:08:53 PDT 2025: Cron job execution completed
+Sun Sep 21 08:00:00 PDT 2025: Starting Open Build weekly analytics report...
+2025-09-21 08:00:02,110 - INFO - Database initialized successfully
+2025-09-21 08:00:02,110 - WARNING - Google Analytics credentials not configured
+2025-09-21 08:00:02,110 - WARNING - YouTube API credentials not configured
+2025-09-21 08:00:03,289 - INFO - Email sent successfully to team@open.build
+Weekly analytics report sent successfully
+Sun Sep 21 08:00:03 PDT 2025: Weekly analytics report completed
+Sun Sep 21 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Sun Sep 21 09:09:16 PDT 2025: Daily automation completed successfully
+Sun Sep 21 09:09:16 PDT 2025: Cron job execution completed
+</div>
+                </div>
+
+                <div id="daily_automation.log" class="log-content ">
+                    <div style="margin-bottom: 10px;">
+                        <strong>File:</strong> logs/daily_automation.log | 
+                        <strong>Size:</strong> 0 bytes | 
+                        <strong>Modified:</strong> 2025-09-19 12:17:32
+                    </div>
+                    <div class="log-box">No content</div>
+                </div>
+
+                <div id="daily_automation_errors.log" class="log-content ">
+                    <div style="margin-bottom: 10px;">
+                        <strong>File:</strong> logs/daily_automation_errors.log | 
+                        <strong>Size:</strong> 3561 bytes | 
+                        <strong>Modified:</strong> 2025-09-21 09:09:16
+                    </div>
+                    <div class="log-box">2025-09-19 12:17:33,184 - INFO - Database initialized successfully
+2025-09-19 12:17:33,184 - INFO - Starting daily outreach automation...
+2025-09-19 12:17:33,184 - INFO - Phase 1: Discovering new targets...
+2025-09-19 12:19:39,601 - WARNING - HTTP 429 for https://venturebeat.com
+2025-09-19 12:20:15,801 - WARNING - Robots.txt disallows fetching: https://dev.to
+2025-09-19 12:24:48,937 - WARNING - HTTP 403 for https://f6s.com
+2025-09-19 12:25:31,250 - INFO - Discovered 0 new targets
+2025-09-19 12:25:31,255 - INFO - Phase 2: Preparing outreach list...
+2025-09-19 12:25:31,264 - INFO - Phase 3: Sending 0 outreach emails...
+2025-09-19 12:25:31,265 - INFO - Phase 4: Collecting analytics data...
+2025-09-19 12:25:31,265 - WARNING - Google Analytics credentials not configured
+2025-09-19 12:25:31,265 - WARNING - YouTube API credentials not configured
+2025-09-19 12:25:31,495 - INFO - Phase 5: Gathering response and source data...
+2025-09-19 12:25:31,495 - INFO - Phase 6: Sending enhanced daily report...
+2025-09-19 12:25:32,150 - INFO - Email sent successfully to team@open.build
+2025-09-19 12:25:32,151 - INFO - Daily automation completed successfully. New targets: 0, Emails sent: 0
+2025-09-20 09:00:03,280 - INFO - Database initialized successfully
+2025-09-20 09:00:03,282 - INFO - Starting daily outreach automation...
+2025-09-20 09:00:03,282 - INFO - Phase 1: Discovering new targets...
+2025-09-20 09:02:41,896 - WARNING - HTTP 429 for https://venturebeat.com
+2025-09-20 09:03:15,646 - WARNING - Robots.txt disallows fetching: https://dev.to
+2025-09-20 09:08:09,771 - WARNING - HTTP 403 for https://f6s.com
+2025-09-20 09:08:52,343 - INFO - Discovered 0 new targets
+2025-09-20 09:08:52,345 - INFO - Phase 2: Preparing outreach list...
+2025-09-20 09:08:52,355 - INFO - Phase 3: Sending 0 outreach emails...
+2025-09-20 09:08:52,356 - INFO - Phase 4: Collecting analytics data...
+2025-09-20 09:08:52,356 - WARNING - Google Analytics credentials not configured
+2025-09-20 09:08:52,356 - WARNING - YouTube API credentials not configured
+2025-09-20 09:08:52,576 - INFO - Phase 5: Gathering response and source data...
+2025-09-20 09:08:52,577 - INFO - Phase 6: Sending enhanced daily report...
+2025-09-20 09:08:53,236 - INFO - Email sent successfully to team@open.build
+2025-09-20 09:08:53,237 - INFO - Daily automation completed successfully. New targets: 0, Emails sent: 0
+2025-09-21 09:00:01,663 - INFO - Database initialized successfully
+2025-09-21 09:00:01,664 - INFO - Starting daily outreach automation...
+2025-09-21 09:00:01,664 - INFO - Phase 1: Discovering new targets...
+2025-09-21 09:02:17,996 - WARNING - HTTP 429 for https://venturebeat.com
+2025-09-21 09:03:15,774 - WARNING - Robots.txt disallows fetching: https://dev.to
+2025-09-21 09:08:25,857 - WARNING - HTTP 403 for https://f6s.com
+2025-09-21 09:09:15,378 - INFO - Discovered 0 new targets
+2025-09-21 09:09:15,384 - INFO - Phase 2: Preparing outreach list...
+2025-09-21 09:09:15,399 - INFO - Phase 3: Sending 0 outreach emails...
+2025-09-21 09:09:15,399 - INFO - Phase 4: Collecting analytics data...
+2025-09-21 09:09:15,400 - WARNING - Google Analytics credentials not configured
+2025-09-21 09:09:15,400 - WARNING - YouTube API credentials not configured
+2025-09-21 09:09:15,686 - INFO - Phase 5: Gathering response and source data...
+2025-09-21 09:09:15,688 - INFO - Phase 6: Sending enhanced daily report...
+2025-09-21 09:09:16,430 - INFO - Email sent successfully to team@open.build
+2025-09-21 09:09:16,431 - INFO - Daily automation completed successfully. New targets: 0, Emails sent: 0
+</div>
+                </div>
+
+                <div id="weekly_analytics.log" class="log-content ">
+                    <div style="margin-bottom: 10px;">
+                        <strong>File:</strong> logs/weekly_analytics.log | 
+                        <strong>Size:</strong> 508 bytes | 
+                        <strong>Modified:</strong> 2025-09-21 08:00:01
+                    </div>
+                    <div class="log-box">
+🚀 Open Build Outreach Automation Report
+========================================
+
+📊 Overall Statistics:
+• Total targets in database: 4
+• Targets contacted: 4
+• Emails sent (last 7 days): 0
+• Contact rate: 100.0%
+
+📋 Target Breakdown by Category:
+• Community: 1
+• Influencer: 1
+• Startup: 1
+• Startup_Publications: 1
+
+📈 Performance Metrics:
+• Average targets discovered per day: 0.006359300476947536
+• Outreach efficiency: 0.0 emails/day
+
+---
+Generated on 2025-09-21 08:00:01
+
+</div>
+                </div>
+
+                <div id="weekly_analytics_errors.log" class="log-content ">
+                    <div style="margin-bottom: 10px;">
+                        <strong>File:</strong> logs/weekly_analytics_errors.log | 
+                        <strong>Size:</strong> 67 bytes | 
+                        <strong>Modified:</strong> 2025-09-21 08:00:01
+                    </div>
+                    <div class="log-box">2025-09-21 08:00:01,518 - INFO - Database initialized successfully
+</div>
+                </div>
+
+            </div>
+            
+            <div class="timestamp">
+                📅 Report generated on 2025-09-21 10:11:17
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showLog(logId) {
+            // Hide all log contents
+            const contents = document.querySelectorAll('.log-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.log-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected log content
+            document.getElementById(logId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
