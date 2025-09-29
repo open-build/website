@@ -26,8 +26,12 @@ import time
 import random
 import re
 import logging
+import sys
+import os
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
+from pathlib import Path
+
 from email.mime.multipart import MIMEMultipart
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, asdict
@@ -52,6 +56,15 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Add blog generator after logger is defined
+sys.path.append(str(Path(__file__).parent))
+try:
+    from blog_generator import BlogArticleGenerator
+    BLOG_ENABLED = True
+except ImportError:
+    logger.warning("Blog generator not available - blog features disabled")
+    BLOG_ENABLED = False
 
 @dataclass
 class Target:
@@ -1177,11 +1190,48 @@ Report Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
    • GitHub forks: {social.get('github_forks', 'N/A')}
 """
         
+        # Add blog article section if enabled
+        if BLOG_ENABLED:
+            try:
+                blog_generator = BlogArticleGenerator()
+                recent_articles = blog_generator.get_recent_articles(limit=3)
+                
+                if recent_articles:
+                    message += f"""
+
+� LATEST TRAINING BLOG ARTICLES ({len(recent_articles)})
+----------------------------------"""
+                    
+                    for article in recent_articles:
+                        message += f"""
+• {article['title']} ({article['category']})
+  Date: {article['date']}
+  Use Case: {article['business_use_case'][:80]}...
+  🔗 Read: https://open.build/blog/articles/day-{article.get('day_number', 'X')}-{article['date']}.html
+"""
+                else:
+                    message += """
+
+📚 TRAINING BLOG
+----------------
+   Daily technical articles coming soon!
+   Topics: Cloud Native, AI-Assisted Development, Buildly.io Tools
+"""
+            except Exception as e:
+                logger.error(f"Error adding blog content to report: {e}")
+                message += """
+
+📚 TRAINING BLOG
+----------------
+   Blog system temporarily unavailable
+"""
+
         message += """
 
-🔗 QUICK LINKS
+�🔗 QUICK LINKS
 --------------
 • Open Build Website: https://open.build
+• Training Blog: https://open.build/training-blog.html
 • GitHub Repository: https://github.com/open-build/website
 
 ---
@@ -1422,6 +1472,19 @@ class OutreachAutomation:
             
             # Store analytics in database
             self.analytics_manager.store_analytics(website_analytics, youtube_analytics, social_analytics)
+            
+            # 4.5. Generate daily blog article (if enabled)
+            if BLOG_ENABLED and os.getenv("BLOG_ENABLED", "true").lower() == "true":
+                logger.info("Phase 4.5: Generating daily training blog article...")
+                try:
+                    blog_generator = BlogArticleGenerator()
+                    article = blog_generator.generate_daily_article()
+                    if article:
+                        logger.info(f"Generated blog article: {article['title']}")
+                    else:
+                        logger.warning("Failed to generate blog article")
+                except Exception as e:
+                    logger.error(f"Error generating blog article: {e}")
             
             # 5. Get recent responses and new sources
             logger.info("Phase 5: Gathering response and source data...")
