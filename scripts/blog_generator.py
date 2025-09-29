@@ -636,8 +636,10 @@ Generate a complete article following this structure exactly, ensuring all requi
                     </div>
                 </header>
                 
-                <div class="prose prose-lg prose-blue dark:prose-invert max-w-none">
-                    {self.format_article_content(article_data['content'])}
+                <div class="prose prose-lg max-w-none">
+                    <div class="text-gray-900 dark:text-gray-100">
+                        {self.format_article_content(article_data['content'])}
+                    </div>
                 </div>
                 
                 <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
@@ -675,25 +677,72 @@ Generate a complete article following this structure exactly, ensuring all requi
 </html>"""
 
     def format_article_content(self, content: str) -> str:
-        """Format AI-generated content for HTML display"""
-        # Basic markdown-like formatting
+        """Format AI-generated content for HTML display with proper markdown conversion"""
+        import re
+        
+        # Clean up any existing HTML tags that might be malformed
+        content = re.sub(r'<p[^>]*><p[^>]*>', '<p>', content)
+        content = re.sub(r'</p></p>', '</p>', content)
+        content = re.sub(r'<p[^>]*>\s*</p>', '', content)
+        
+        # Convert markdown-style formatting
+        # Bold text: **text** -> <strong>text</strong>
+        content = re.sub(r'\*\*([^*]+)\*\*', r'<strong class="font-bold text-gray-900 dark:text-white">\1</strong>', content)
+        
+        # Italic text: *text* -> <em>text</em>
+        content = re.sub(r'(?<!\*)\*([^*]+)\*(?!\*)', r'<em class="italic text-gray-800 dark:text-gray-200">\1</em>', content)
+        
+        # Headers
+        content = re.sub(r'^### (.+)$', r'<h3 class="text-xl font-semibold mt-6 mb-3 text-gray-900 dark:text-white">\1</h3>', content, flags=re.MULTILINE)
+        content = re.sub(r'^## (.+)$', r'<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">\1</h2>', content, flags=re.MULTILINE)
+        content = re.sub(r'^# (.+)$', r'<h1 class="text-3xl font-bold mt-8 mb-6 text-gray-900 dark:text-white">\1</h1>', content, flags=re.MULTILINE)
+        
+        # Code blocks
+        content = re.sub(r'```([\s\S]*?)```', r'<pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4"><code class="text-gray-900 dark:text-gray-100">\1</code></pre>', content)
+        
+        # Inline code
+        content = re.sub(r'`([^`]+)`', r'<code class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-2 py-1 rounded text-sm">\1</code>', content)
+        
+        # Process line by line for paragraphs and lists
         lines = content.split('\n')
         formatted_lines = []
+        in_list = False
         
-        for line in lines:
+        for i, line in enumerate(lines):
             line = line.strip()
+            
+            # Skip empty lines
             if not line:
-                formatted_lines.append('<br>')
-            elif line.startswith('# '):
-                formatted_lines.append(f'<h2 class="text-2xl font-bold mt-8 mb-4">{line[2:]}</h2>')
-            elif line.startswith('## '):
-                formatted_lines.append(f'<h3 class="text-xl font-semibold mt-6 mb-3">{line[3:]}</h3>')
-            elif line.startswith('- '):
-                formatted_lines.append(f'<li class="mb-2">{line[2:]}</li>')
-            elif line.startswith('```'):
-                formatted_lines.append('<pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto"><code>')
+                if in_list:
+                    formatted_lines.append('</ul>')
+                    in_list = False
+                continue
+                
+            # Handle list items
+            if line.startswith('- ') or line.startswith('* '):
+                if not in_list:
+                    formatted_lines.append('<ul class="list-disc pl-6 mb-4 space-y-2">')
+                    in_list = True
+                formatted_lines.append(f'<li class="text-gray-700 dark:text-gray-300">{line[2:]}</li>')
             else:
-                formatted_lines.append(f'<p class="mb-4">{line}</p>')
+                if in_list:
+                    formatted_lines.append('</ul>')
+                    in_list = False
+                    
+                # Skip lines that are already HTML tags
+                if line.startswith('<') and line.endswith('>'):
+                    formatted_lines.append(line)
+                # Skip lines that are already wrapped in HTML
+                elif '<p' in line or '<h' in line or '<pre' in line or '<ul' in line:
+                    formatted_lines.append(line)
+                # Wrap regular text in paragraphs
+                else:
+                    if line:
+                        formatted_lines.append(f'<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">{line}</p>')
+        
+        # Close any open list
+        if in_list:
+            formatted_lines.append('</ul>')
         
         return '\n'.join(formatted_lines)
 
