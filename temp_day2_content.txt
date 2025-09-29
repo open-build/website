@@ -1,0 +1,54 @@
+**Getting Started: From Patient Data Concept to Production-Ready System**
+
+Welcome back to our Day 2 training series on building the Patient Data Management System (PDMS) introduced in Day 1 with Emily, the healthcare data manager. In this article, we'll take you through the steps to implement your vision from concept to production-ready system.
+
+**Introduction**
+
+As discussed during our previous session, PDMS is an essential tool for healthcare organizations to manage patient data efficiently. With the right implementation, you can leverage cutting-edge technologies like artificial intelligence (AI) and cloud-native architecture to improve data accuracy, security, and compliance. Today, we'll focus on the hands-on aspects of building a production-ready system.
+
+**Product Manager Getting Started**
+
+As a product manager, your primary goal is to define and deliver features that meet the needs of your users. To get started with PDMS implementation, follow these steps:
+
+1. **Use labs.buildly.io for hands-on learning**: Labs.buildly.io provides an immersive environment to experiment with PDMS in a safe and controlled manner. By working on real-world projects, you'll gain practical experience and develop project management skills.
+2. **Apply radicaltherapy.dev methodology**: Radicaltherapy.dev is a proven approach to building patient data management systems. By adopting this methodology, you can ensure that your implementation aligns with industry best practices and meets regulatory requirements.
+3. **AI-assisted requirement gathering**: AI-powered tools can help identify patterns and relationships in large datasets, making it easier to gather requirements from stakeholders. Utilize these tools to accelerate the requirement-gathering process.
+
+**Developer Getting Started**
+
+As a developer, your primary goal is to build a robust and scalable system that meets the demands of PDMS implementation. To get started, follow these steps:
+
+1. **Set up buildly-cli**: Install the buildly-cli tool on your machine to interact with labs.buildly.io. You can find instructions on how to set it up in our previous session.
+2. **Backend development commands**: Familiarize yourself with essential backend development commands using `buildly-cli`. This will help you create and manage databases, integrate APIs, and deploy applications.
+3. **React frontend templates**: Create a React-based frontend template that provides an intuitive interface for users to interact with PDMS features. You can find examples of React templates in our documentation.
+
+**Integration and Deployment**
+
+Once you've implemented the backend and frontend components, it's time to integrate them into a cohesive system. Follow these steps:
+
+1. **Integrate Copilot for healthcare compliance**: Utilize Copilot to ensure that your implementation meets regulatory requirements for patient data management. You can find more information on how to use Copilot in our documentation.
+2. **Deploy the application**: Use buildly-cli to deploy your application to a cloud-based environment, such as AWS or Google Cloud.
+
+**Next Steps**
+
+Congratulations! You've taken the first step towards building a production-ready Patient Data Management System. To further enhance your implementation:
+
+* Continuously monitor and analyze data to identify areas for improvement.
+* Engage with our community to share knowledge, best practices, and feedback on your implementation.
+* Stay up-to-date with the latest advancements in AI, cloud-native architecture, and healthcare data management.
+
+Remember, building a successful PDMS requires dedication, perseverance, and collaboration. By following these steps, you'll be well on your way to creating an exceptional patient data management system that meets the needs of healthcare organizations worldwide.
+
+**Practical Code Examples**
+
+For more information on implementing PDMS components, please refer to our documentation:
+
+* [https://labs.buildly.io](https://labs.buildly.io)
+* [https://radicaltherapy.dev](https://radicaltherapy.dev)
+* [https://docs.buildly.io](https://docs.buildly.io)
+
+**Get Started with Labs.Buildly.IO**
+
+Sign up for a free trial on labs.buildly.io to begin your PDMS implementation journey. Create an account, and start exploring the platform's features and tools.
+
+Happy coding!

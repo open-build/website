@@ -494,4 +494,49 @@ Before publishing each article, ensure:
 
 ---
 
+## Day 2 Implementation Article - Getting Started Guide
+
+### Specialized Prompt for Implementation Articles
+
+**Article Type:** Getting Started Implementation Guide  
+**Purpose:** Bridge the gap from concept (Day 1) to working system  
+**Target:** Both Product Managers and Developers taking action  
+
+### Key Components Required:
+1. **Product Manager Section:**
+   - Interactive learning with https://labs.buildly.io
+   - Practical application of https://radicaltherapy.dev methodology
+   - AI-assisted requirement gathering and planning
+
+2. **Developer Section:**
+   - Environment setup with buildly-cli commands
+   - Backend service generation with security patterns
+   - React frontend templates with healthcare UI components
+   - Copilot integration for compliance code generation
+
+3. **Integration & Deployment:**
+   - Service orchestration configuration
+   - Compliance validation and audit logging
+   - Production deployment considerations
+
+### Required Resource Integration:
+- **Interactive Labs:** https://labs.buildly.io for hands-on learning
+- **Technical Documentation:** https://docs.buildly.io for API references
+- **Development Process:** https://radicaltherapy.dev for methodology
+- **Open Source Tools:** https://github.com/buildlyio for templates and examples
+
+### Continuity Requirements:
+- Direct reference to previous day's use case (Emily's Patient Data Management)
+- Show progression from problem understanding to working solution
+- Maintain consistent tone and technical depth
+- Preview next day's advanced topics
+
+### Code Example Requirements:
+- Complete CLI command sequences that readers can copy/paste
+- Copilot prompts with expected outputs
+- Integration configuration examples
+- Security validation patterns specific to use case
+
+---
+
 *This prompt document evolves continuously based on article performance and reader feedback. Last updated: 2025-09-29*
