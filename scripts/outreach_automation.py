@@ -209,7 +209,8 @@ class DatabaseManager:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
-        cooldown_date = (datetime.now() - timedelta(days=30)).isoformat()
+        cooldown_days = int(os.getenv("COOLDOWN_DAYS", "30"))
+        cooldown_date = (datetime.now() - timedelta(days=cooldown_days)).isoformat()
         
         cursor.execute("""
             SELECT * FROM targets 
@@ -444,6 +445,46 @@ class TargetDiscovery:
                 'email': 'support@angel.co',
                 'contact_name': 'Support Team',
                 'description': 'Startup platform - access to early-stage companies needing developers'
+            },
+            {
+                'name': 'Product Hunt',
+                'url': 'https://www.producthunt.com',
+                'category': 'startup',
+                'email': 'hello@producthunt.com',
+                'contact_name': 'Community Team',
+                'description': 'Product discovery platform - showcase developer tools and get feedback'
+            },
+            {
+                'name': 'Indie Hackers',
+                'url': 'https://www.indiehackers.com',
+                'category': 'community',
+                'email': 'hello@indiehackers.com',
+                'contact_name': 'Courtland Allen',
+                'description': 'Community for indie entrepreneurs - developer tool partnerships'
+            },
+            {
+                'name': 'Stack Overflow',
+                'url': 'https://stackoverflow.com',
+                'category': 'community',
+                'email': 'team@stackoverflow.com',
+                'contact_name': 'Community Team',
+                'description': 'Developer Q&A platform - community partnerships and developer outreach'
+            },
+            {
+                'name': 'GitHub Education',
+                'url': 'https://education.github.com',
+                'category': 'platform',
+                'email': 'education@github.com',
+                'contact_name': 'Education Team',
+                'description': 'Educational programs for students and teachers - partnership opportunities'
+            },
+            {
+                'name': 'Coursera',
+                'url': 'https://www.coursera.org',
+                'category': 'platform',
+                'email': 'partners@coursera.org',
+                'contact_name': 'Partnership Team',
+                'description': 'Online education platform - potential course partnerships'
             }
         ]
     
