@@ -4,39 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Training Blog - Open Build Foundry</title>
-    <link rel="stylesheet" href="assets/css/tailwind.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <meta name="description" content="Daily technical training articles on cloud native development with AI assistance. Learn to build scalable services using Buildly.io tools and the Radical Therapy process.">
+    
+    <!-- Favicons -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS v3 (Production Ready) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3B82F6',
+                        'primary-dark': '#2563EB'
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        // Basic dark mode configuration for Tailwind v4
+        if (typeof window !== 'undefined') {
+            // Check for saved theme or default to light
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        }
+    </script>
+    
+    <!-- Custom Animations CSS (after Tailwind) -->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body class="font-['Inter'] bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="index.html" class="flex-shrink-0">
-                        <img class="h-8 w-auto" src="assets/img/OPEN-BUILD-LOGO.png" alt="Open Build">
-                    </a>
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html" class="text-gray-500 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="training-blog.html" class="bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium">Training Blog</a>
-                        <a href="portfolio.html" class="text-gray-500 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Portfolio</a>
-                    </div>
-                </div>
+    <nav class="bg-white dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 fixed w-full z-50 transition-colors duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="assets/img/OPEN-BUILD-LOGO.png" alt="Open Build" class="h-8 w-auto">
+                    <span class="text-xl font-bold text-gray-900 dark:text-white">Open Build</span>
+                </a>
             </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+                
+                <!-- Desktop navigation -->
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="index.html#home" class="text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Home</a></li>
+                    <li><a href="index.html#about" class="text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">About</a></li>
+                    <li><a href="index.html#services" class="text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Services</a></li>
+                    <li><a href="index.html#pricing" class="text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Pricing</a></li>
+                    <li><a href="training-blog.html" class="text-primary dark:text-primary font-semibold transition-colors">Training Blog</a></li>
+                    <li><a href="index.html#contact" class="text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Contact</a></li>
+                    <li><a href="/portfolios" class="text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Portfolios</a></li>
+                </ul>
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button class="md:hidden text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" id="mobile-menu-btn">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile navigation -->
+        <div class="hidden px-6 pb-4 border-t border-gray-200 dark:border-gray-700" id="mobile-menu">
+            <a href="index.html#home" class="block py-2 text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Home</a>
+            <a href="index.html#about" class="block py-2 text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">About</a>
+            <a href="index.html#services" class="block py-2 text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Services</a>
+            <a href="index.html#pricing" class="block py-2 text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Pricing</a>
+            <a href="training-blog.html" class="block py-2 text-primary dark:text-primary font-semibold transition-colors">Training Blog</a>
+            <a href="index.html#contact" class="block py-2 text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Contact</a>
+            <a href="/portfolios" class="block py-2 text-gray-600 dark:text-gray-500 hover:text-primary dark:hover:text-primary transition-colors">Portfolios</a>
         </div>
     </nav>
 
-    <!-- Header -->
-    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl font-bold mb-4">Cloud Native Development Training</h1>
-            <p class="text-xl max-w-3xl mx-auto">Daily articles teaching developers and product managers how to build cloud native services using AI, Buildly.io tools, and the Radical Therapy development process.</p>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center pt-20 overflow-hidden transition-colors duration-300">
+        <!-- Background Animation -->
+        <div class="absolute inset-0 opacity-10 overflow-hidden">
+            <!-- Code Brackets -->
+            <div class="absolute top-20 left-20 text-6xl font-mono animate-pulse text-blue-600">{ }</div>
+            <div class="absolute top-32 right-32 text-4xl font-mono animate-bounce text-purple-600">&lt;/&gt;</div>
+            <div class="absolute bottom-40 left-40 text-5xl font-mono animate-pulse text-green-600">( )</div>
         </div>
-    </div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 animate-fadeInUp">
+                <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Cloud Native Development
+                </span>
+                <br>
+                <span class="text-gray-900 dark:text-white">Training Blog</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto animate-fadeInUp animation-delay-200">
+                Daily articles teaching developers and product managers how to build cloud native services using 
+                <span class="text-blue-600 font-semibold">AI assistance</span>, 
+                <span class="text-purple-600 font-semibold">Buildly.io tools</span>, and the 
+                <span class="text-green-600 font-semibold">Radical Therapy process</span>.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fadeInUp animation-delay-400">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
+                    <div class="text-2xl font-bold text-blue-600">Daily</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">New Articles</div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
+                    <div class="text-2xl font-bold text-purple-600">AI-Powered</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">Development</div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
+                    <div class="text-2xl font-bold text-green-600">Practical</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">Examples</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Blog Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-20 relative z-20">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Main Content -->
             <div class="lg:col-span-2">
