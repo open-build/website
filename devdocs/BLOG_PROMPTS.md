@@ -44,10 +44,18 @@ You are writing a technical training article for the Open Build foundry training
 - **Both**: Focus on creative challenges rather than boilerplate code
 
 ### Required Source Integration:
-You MUST reference and integrate practical examples from these sources:
+You MUST reference and integrate practical examples from these VERIFIED sources:
 - **Buildly.io Platform**: https://www.buildly.io (main platform)
-- **Buildly.io Documentation**: https://docs.buildly.io (technical documentation)
+- **Buildly.io Documentation**: https://docs.buildly.io (technical documentation - VERIFIED)
+- **Buildly CLI Repository**: https://github.com/buildlyio/buildly-cli (actual CLI commands - VERIFIED)
 - **Radical Therapy Process**: https://radicaltherapy.dev (development methodology)
+
+### CRITICAL: Use Only Real Technical Information
+Before writing any technical content, consult the BUILDLY_REAL_DOCS.md reference file which contains VERIFIED information about:
+- Actual CLI commands and workflow (not fabricated ones)
+- Real Product Labs features and capabilities
+- True BabbleBeaver AI integration process
+- Documented architecture and infrastructure
 - **Open Source Tools**: https://github.com/buildlyio (community tools)
 - **Buildly Labs Platform**: https://labs.buildly.io (deployment platform)
 
