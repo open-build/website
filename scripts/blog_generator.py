@@ -572,8 +572,8 @@ Generate a complete article following this structure exactly, ensuring all requi
     <title>{article_data['title']} - Open Build Training</title>
     
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -624,7 +624,7 @@ Generate a complete article following this structure exactly, ensuring all requi
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../../assets/css/animations.css">
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 font-sans transition-colors duration-300">
@@ -633,16 +633,16 @@ Generate a complete article following this structure exactly, ensuring all requi
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <a href="../index.html" class="flex items-center">
-                        <img src="../assets/img/OPEN-BUILD-LOGO.png" alt="Open Build" class="h-8 w-auto">
+                    <a href="../../index.html" class="flex items-center">
+                        <img src="../../assets/img/OPEN-BUILD-LOGO.png" alt="Open Build" class="h-8 w-auto">
                         <span class="ml-2 text-xl font-bold text-gray-900 dark:text-white">Open Build</span>
                     </a>
                 </div>
                 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="../index.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
-                    <a href="../training-blog.html" class="text-blue-600 dark:text-blue-400 font-semibold">Training Blog</a>
-                    <a href="../portfolio.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Portfolio</a>
+                    <a href="../../index.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
+                    <a href="../../training-blog.html" class="text-blue-600 dark:text-blue-400 font-semibold">Training Blog</a>
+                    <a href="../../portfolio.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Portfolio</a>
                 </div>
             </div>
         </div>
@@ -652,7 +652,7 @@ Generate a complete article following this structure exactly, ensuring all requi
     <div class="pt-20 min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
         <div class="max-w-4xl mx-auto px-4 py-8">
             <nav class="mb-8">
-                <a href="../training-blog.html" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                <a href="../../training-blog.html" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
                     <i class="fas fa-arrow-left mr-2"></i>
                     Back to Training Blog
                 </a>
