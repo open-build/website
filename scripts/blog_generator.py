@@ -194,6 +194,16 @@ class BlogArticleGenerator:
             with open(prompt_file, 'r', encoding='utf-8') as f:
                 content = f.read()
             
+            # Also load the real documentation reference
+            real_docs_file = Path(__file__).parent.parent / "devdocs" / "BUILDLY_REAL_DOCS.md"
+            real_docs_content = ""
+            try:
+                with open(real_docs_file, 'r', encoding='utf-8') as f:
+                    real_docs_content = f.read()
+            except Exception as e:
+                logger.warning(f"Could not load real docs reference: {e}")
+                real_docs_content = ""
+            
             # Extract the comprehensive prompt section
             start_marker = "### Complete Daily Article Generation Prompt"
             end_marker = "### Article Structure Framework"
@@ -218,6 +228,10 @@ class BlogArticleGenerator:
                     technical_focus=use_case['technical_focus'],
                     ai_assistance=use_case['ai_assistance']
                 )
+                
+                # Append the real documentation reference for technical accuracy
+                if real_docs_content:
+                    formatted_prompt += f"\n\n## CRITICAL: TECHNICAL ACCURACY REQUIREMENTS\n\n{real_docs_content}\n\nYou MUST use only the verified technical information above. Do not fabricate CLI commands, features, or workflows that are not documented in the real sources."
                 
                 return formatted_prompt
             
@@ -247,12 +261,35 @@ You are writing a technical training article for the Open Build foundry training
 - **Both**: Focus on creative challenges rather than boilerplate code
 
 ### Required Source Integration:
-You MUST reference and integrate practical examples from these sources:
+You MUST reference and integrate practical examples from these VERIFIED sources:
 - **Buildly.io Platform**: https://www.buildly.io (main platform)
-- **Buildly.io Documentation**: https://docs.buildly.io (technical documentation)
+- **Buildly.io Documentation**: https://docs.buildly.io (technical documentation - VERIFIED)
+- **Buildly CLI Repository**: https://github.com/buildlyio/buildly-cli (actual CLI commands - VERIFIED)
 - **Radical Therapy Process**: https://radicaltherapy.dev (development methodology)
 - **Open Source Tools**: https://github.com/buildlyio (community tools)
 - **Buildly Labs Platform**: https://labs.buildly.io (deployment platform)
+
+## CRITICAL: USE ONLY REAL TECHNICAL INFORMATION
+
+### Actual Buildly CLI Commands (VERIFIED):
+- Setup: git clone https://github.com/buildlyio/buildly-cli.git && cd buildly-cli && chmod +x *.sh
+- Development Environment: source dev.sh (interactive menu for Minikube/Helm/Buildly Core)
+- Service Generation: ./django.sh (AI-powered Django API generation)
+- Infrastructure: Auto-installs Docker, Kubernetes (Minikube), Helm, kubectl
+
+### Real Buildly Product Labs Features (VERIFIED):
+- Account registration at organization's Buildly Product Labs instance
+- AI-Powered Onboarding at https://labs-onboarding.buildly.io/ (Beta)
+- Product Portfolio, Roadmap, Release Management, Analytics
+- BabbleBeaver AI assistant for intelligent project recommendations
+- Team collaboration, notifications, integration management
+
+### Architecture Facts (VERIFIED):
+Frontend (React) ↔ Buildly Core (Gateway) ↔ Microservices (Django)
+     ↓                    ↓                        ↓
+BabbleBeaver AI    Kubernetes (Minikube)    Database (PostgreSQL)
+
+DO NOT FABRICATE: CLI commands, features, workflows, or API endpoints that are not documented above
 
 ## ARTICLE STRUCTURE (FOLLOW EXACTLY)
 
