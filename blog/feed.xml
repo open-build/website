@@ -4,8 +4,16 @@
         <title>Open Build Training Blog</title>
         <description>Daily technical articles on cloud native development with AI assistance</description>
         <link>https://open.build/training-blog.html</link>
-        <lastBuildDate>Tue, 30 Sep 2025 15:09:37 </lastBuildDate>
+        <lastBuildDate>Wed, 01 Oct 2025 07:31:38 </lastBuildDate>
         <generator>Open Build Blog System</generator>
+        <item>
+            <title>Learning Management Platform</title>
+            <description>Scalable course delivery with progress tracking and analytics</description>
+            <link>https://open.build/blog/articles/day-3-2025-10-01.html</link>
+            <category>Education</category>
+            <pubDate>Wed, 01 Oct 2025 08:00:00 GMT</pubDate>
+            <guid>https://open.build/blog/articles/day-3-2025-10-01.html</guid>
+        </item>
         <item>
             <title>Getting Started: From Patient Data Concept to Production-Ready System</title>
             <description>Getting started with buildly-cli and React templates for healthcare systems</description>
