@@ -274,20 +274,32 @@ You MUST reference and integrate practical examples from these VERIFIED sources:
 ### Actual Buildly CLI Commands (VERIFIED):
 - Setup: git clone https://github.com/buildlyio/buildly-cli.git && cd buildly-cli && chmod +x *.sh
 - Development Environment: source dev.sh (interactive menu for Minikube/Helm/Buildly Core)
-- Service Generation: ./django.sh (AI-powered Django API generation)
+- Service Generation: ./django.sh (BabbleBeaver AI-powered Django API generation)
 - Infrastructure: Auto-installs Docker, Kubernetes (Minikube), Helm, kubectl
 
 ### Real Buildly Product Labs Features (VERIFIED):
+- Product management platform with AI tools powered by BabbleBeaver AI engine
 - Account registration at organization's Buildly Product Labs instance
 - AI-Powered Onboarding at https://labs-onboarding.buildly.io/ (Beta)
 - Product Portfolio, Roadmap, Release Management, Analytics
-- BabbleBeaver AI assistant for intelligent project recommendations
+- BabbleBeaver-powered intelligent project recommendations and automation
+- Integration with open source developer tools (buildly-cli, Buildly Core)
 - Team collaboration, notifications, integration management
 
 ### Architecture Facts (VERIFIED):
+Buildly Labs (Product Management) ↔ Open Source Dev Tools
+            ↓                              ↓
+    BabbleBeaver AI Engine    →    buildly-cli + Buildly Core
+            ↓                              ↓
 Frontend (React) ↔ Buildly Core (Gateway) ↔ Microservices (Django)
-     ↓                    ↓                        ↓
-BabbleBeaver AI    Kubernetes (Minikube)    Database (PostgreSQL)
+                            ↓                        ↓
+                  Kubernetes Deployment    Database (PostgreSQL)
+
+### Code Generation Sources:
+- **Open Source Tools:** buildly-cli and Buildly Core handle code generation
+- **AI Engine:** BabbleBeaver powers intelligent code generation and recommendations
+- **Infrastructure:** Kubernetes deployment and services monitoring
+- **NO COMPETITOR NAMES:** Use generic terms like "AI models" or "LLM providers" instead of specific company names
 
 DO NOT FABRICATE: CLI commands, features, workflows, or API endpoints that are not documented above
 

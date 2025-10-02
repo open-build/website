@@ -4,8 +4,16 @@
         <title>Open Build Training Blog</title>
         <description>Daily technical articles on cloud native development with AI assistance</description>
         <link>https://open.build/training-blog.html</link>
-        <lastBuildDate>Wed, 01 Oct 2025 07:31:38 </lastBuildDate>
+        <lastBuildDate>Thu, 02 Oct 2025 07:31:52 </lastBuildDate>
         <generator>Open Build Blog System</generator>
+        <item>
+            <title>Smart Building Management System</title>
+            <description>Real-time monitoring and control of building systems and energy usage</description>
+            <link>https://open.build/blog/articles/day-4-2025-10-02.html</link>
+            <category>IoT</category>
+            <pubDate>Thu, 02 Oct 2025 08:00:00 GMT</pubDate>
+            <guid>https://open.build/blog/articles/day-4-2025-10-02.html</guid>
+        </item>
         <item>
             <title>Learning Management Platform</title>
             <description>Scalable course delivery with progress tracking and analytics</description>

@@ -5,9 +5,9 @@
 **Source:** https://github.com/buildlyio/buildly-cli
 
 ### Key Facts About Buildly CLI:
-- **Purpose:** Comprehensive toolkit for AI-powered microservices with Django
+- **Purpose:** Comprehensive open source toolkit for AI-powered microservices with Django
 - **Architecture:** Creates complete ecosystems with Kubernetes, Docker, Helm
-- **AI Integration:** BabbleBeaver framework for OpenAI, Gemini integration
+- **AI Integration:** BabbleBeaver AI engine for intelligent code generation
 - **Infrastructure:** Auto-installs Docker, Kubernetes (Minikube), Helm, kubectl
 
 ### Real Setup Process:
@@ -37,9 +37,13 @@ source dev.sh
 
 ### Real Architecture:
 ```
+Buildly Labs (Product Management) ↔ Open Source Dev Tools
+            ↓                              ↓
+    BabbleBeaver AI Engine    →    buildly-cli + Buildly Core
+            ↓                              ↓
 Frontend (React) ↔ Buildly Core (Gateway) ↔ Microservices (Django)
-     ↓                    ↓                        ↓
-BabbleBeaver AI    Kubernetes (Minikube)    Database (PostgreSQL)
+                            ↓                        ↓
+                  Kubernetes Deployment    Database (PostgreSQL)
 ```
 
 ## Actual Buildly Product Labs Information
@@ -47,9 +51,10 @@ BabbleBeaver AI    Kubernetes (Minikube)    Database (PostgreSQL)
 **Source:** https://docs.buildly.io/docs/quickstart.html
 
 ### Key Facts About Product Labs:
-- **Purpose:** AI-powered product management platform
+- **Purpose:** Product management platform with AI tools powered by BabbleBeaver
 - **Target:** Modern development teams and product managers
-- **AI Assistant:** BabbleBeaver for intelligent recommendations
+- **AI Engine:** BabbleBeaver provides intelligent recommendations and automation
+- **Integration:** Works with open source developer tools for complete workflow
 
 ### Real Setup Process:
 1. **Account Registration:** Navigate to organization's Buildly Product Labs instance
@@ -71,9 +76,11 @@ BabbleBeaver AI    Kubernetes (Minikube)    Database (PostgreSQL)
 - **Profile Settings:** Personal and account preferences
 
 ### Real AI Features:
-- **BabbleBeaver Integration:** OpenAI and Gemini LLM support
+- **BabbleBeaver AI Engine:** Advanced LLM integration with multiple AI model providers
 - **AI-Powered Onboarding:** Intelligent setup recommendations
 - **Smart Recommendations:** Context-aware project guidance
+- **Code Generation:** Via open source buildly-cli and Buildly Core
+- **Kubernetes Management:** AI-assisted deployment and service monitoring
 - **Privacy & Data Handling:** Enterprise-grade security
 
 ## Technical Architecture Facts
