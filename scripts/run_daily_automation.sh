@@ -8,7 +8,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin"
 export HOME="/Users/greglind"
 
 # Change to project directory
-cd "/Users/greglind/Projects/open-build/open-build-new-website"
+cd "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website"
 
 # Load environment variables
 if [ -f .env ]; then
@@ -16,19 +16,19 @@ if [ -f .env ]; then
 fi
 
 # Log start time
-echo "$(date): Starting Open Build daily outreach automation..." >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/cron.log"
+echo "$(date): Starting Open Build daily outreach automation..." >> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/cron.log"
 
 # Run the automation with proper error handling
-"/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" "/Users/greglind/Projects/open-build/open-build-new-website/scripts/outreach_automation.py" --run >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/daily_automation.log" 2>> "/Users/greglind/Projects/open-build/open-build-new-website/logs/daily_automation_errors.log"
+"/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/.venv/bin/python" "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/scripts/outreach_automation.py" --run >> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/daily_automation.log" 2>> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/daily_automation_errors.log"
 
 # Check exit status
 if [ $? -eq 0 ]; then
-    echo "$(date): Daily automation completed successfully" >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/cron.log"
+    echo "$(date): Daily automation completed successfully" >> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/cron.log"
 else
-    echo "$(date): Daily automation failed with exit code $?" >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/cron.log"
+    echo "$(date): Daily automation failed with exit code $?" >> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/cron.log"
     
     # Send error notification email
-    "/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" -c "
+    "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/.venv/bin/python" -c "
 import smtplib
 import os
 from email.mime.text import MIMEText
@@ -82,8 +82,8 @@ Open Build Outreach Automation System
     print('Error notification sent successfully')
 except Exception as e:
     print(f'Failed to send error notification: {e}')
-" >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/cron.log" 2>&1
+" >> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/cron.log" 2>&1
 fi
 
 # Log completion
-echo "$(date): Cron job execution completed" >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/cron.log"
+echo "$(date): Cron job execution completed" >> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/cron.log"

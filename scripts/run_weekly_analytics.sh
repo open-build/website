@@ -8,7 +8,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin"
 export HOME="/Users/greglind"
 
 # Change to project directory
-cd "/Users/greglind/Projects/open-build/open-build-new-website"
+cd "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website"
 
 # Load environment variables
 if [ -f .env ]; then
@@ -16,10 +16,10 @@ if [ -f .env ]; then
 fi
 
 # Log start time
-echo "$(date): Starting Open Build weekly analytics report..." >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/cron.log"
+echo "$(date): Starting Open Build weekly analytics report..." >> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/cron.log"
 
 # Generate weekly report
-"/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" "/Users/greglind/Projects/open-build/open-build-new-website/scripts/outreach_automation.py" --report >> "/Users/greglind/Projects/open-build/open-build-new-website/logs/weekly_analytics.log" 2>> "/Users/greglind/Projects/open-build/open-build-new-website/logs/weekly_analytics_errors.log"
+"/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/.venv/bin/python" "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/scripts/outreach_automation.py" --report >> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/weekly_analytics.log" 2>> "/Users/greglind/Projects/Sales and Marketing/websites/open-build-new-website/logs/weekly_analytics_errors.log"
 
 # Send comprehensive weekly analytics email
 "/Users/greglind/Projects/open-build/open-build-new-website/.venv/bin/python" -c "

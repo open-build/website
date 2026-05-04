@@ -4,8 +4,16 @@
         <title>Open Build Training Blog</title>
         <description>Daily technical articles on cloud native development with AI assistance</description>
         <link>https://open.build/training-blog.html</link>
-        <lastBuildDate>Thu, 02 Oct 2025 07:31:52 </lastBuildDate>
+        <lastBuildDate>Fri, 03 Oct 2025 07:30:05 </lastBuildDate>
         <generator>Open Build Blog System</generator>
+        <item>
+            <title>Supply Chain Management System</title>
+            <description>Supply chain management with AI-powered forecasting and optimization</description>
+            <link>https://open.build/blog/articles/day-5-2025-10-03.html</link>
+            <category>Logistics</category>
+            <pubDate>Fri, 03 Oct 2025 08:00:00 GMT</pubDate>
+            <guid>https://open.build/blog/articles/day-5-2025-10-03.html</guid>
+        </item>
         <item>
             <title>Smart Building Management System</title>
             <description>Real-time monitoring and control of building systems and energy usage</description>

@@ -235,15 +235,15 @@
                     <h3>📊 Overall Status</h3>
                     <div class="metric">
                         <span>Total Targets</span>
-                        <span class="metric-value">13</span>
+                        <span class="metric-value">18</span>
                     </div>
                     <div class="metric">
                         <span>Targets Contacted</span>
-                        <span class="metric-value">13</span>
+                        <span class="metric-value">18</span>
                     </div>
                     <div class="metric">
                         <span>Ready for Outreach</span>
-                        <span class="metric-value">0</span>
+                        <span class="metric-value">18</span>
                     </div>
                 </div>
                 
@@ -251,11 +251,11 @@
                     <h3>📅 Last 7 Days</h3>
                     <div class="metric">
                         <span>New Targets</span>
-                        <span class="metric-value">9</span>
+                        <span class="metric-value">0</span>
                     </div>
                     <div class="metric">
                         <span>Emails Sent</span>
-                        <span class="metric-value">9</span>
+                        <span class="metric-value">0</span>
                     </div>
                     <div class="metric">
                         <span>Responses</span>
@@ -267,11 +267,11 @@
                     <h3>📅 Last 30 Days</h3>
                     <div class="metric">
                         <span>New Targets</span>
-                        <span class="metric-value">9</span>
+                        <span class="metric-value">0</span>
                     </div>
                     <div class="metric">
                         <span>Emails Sent</span>
-                        <span class="metric-value">9</span>
+                        <span class="metric-value">0</span>
                     </div>
                     <div class="metric">
                         <span>Responses</span>
@@ -300,7 +300,7 @@
             
             <!-- Target Categories -->
             <div class='card'><h3>🎯 Targets by Category</h3>
-            <div class='metric'><span>Startup</span><span class='metric-value'>7</span></div><div class='metric'><span>Community</span><span class='metric-value'>4</span></div><div class='metric'><span>Startup_Publications</span><span class='metric-value'>1</span></div><div class='metric'><span>Influencer</span><span class='metric-value'>1</span></div>
+            <div class='metric'><span>Startup</span><span class='metric-value'>8</span></div><div class='metric'><span>Community</span><span class='metric-value'>6</span></div><div class='metric'><span>Platform</span><span class='metric-value'>2</span></div><div class='metric'><span>Startup_Publications</span><span class='metric-value'>1</span></div><div class='metric'><span>Influencer</span><span class='metric-value'>1</span></div>
             </div>
             
             <!-- Daily Stats Table -->
@@ -317,14 +317,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr>
-                            <td>2025-09-21</td>
-                            <td>9</td>
-                            <td>9</td>
-                            <td>0</td>
-                            <td>13</td>
-                        </tr>
 
                     </tbody>
                 </table>
@@ -485,25 +477,58 @@
                 <div id="cron.log" class="log-content active">
                     <div style="margin-bottom: 10px;">
                         <strong>File:</strong> logs/cron.log | 
-                        <strong>Size:</strong> 1105 bytes | 
-                        <strong>Modified:</strong> 2025-09-21 09:09:16
+                        <strong>Size:</strong> 4732 bytes | 
+                        <strong>Modified:</strong> 2025-10-02 09:00:13
                     </div>
-                    <div class="log-box">Fri Sep 19 12:17:32 PDT 2025: Starting Open Build daily outreach automation...
-Fri Sep 19 12:25:32 PDT 2025: Daily automation completed successfully
-Fri Sep 19 12:25:32 PDT 2025: Cron job execution completed
-Sat Sep 20 09:00:01 PDT 2025: Starting Open Build daily outreach automation...
-Sat Sep 20 09:08:53 PDT 2025: Daily automation completed successfully
-Sat Sep 20 09:08:53 PDT 2025: Cron job execution completed
-Sun Sep 21 08:00:00 PDT 2025: Starting Open Build weekly analytics report...
-2025-09-21 08:00:02,110 - INFO - Database initialized successfully
-2025-09-21 08:00:02,110 - WARNING - Google Analytics credentials not configured
-2025-09-21 08:00:02,110 - WARNING - YouTube API credentials not configured
-2025-09-21 08:00:03,289 - INFO - Email sent successfully to team@open.build
-Weekly analytics report sent successfully
-Sun Sep 21 08:00:03 PDT 2025: Weekly analytics report completed
-Sun Sep 21 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
-Sun Sep 21 09:09:16 PDT 2025: Daily automation completed successfully
-Sun Sep 21 09:09:16 PDT 2025: Cron job execution completed
+                    <div class="log-box">Wed Sep 24 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Wed Sep 24 09:00:12 PDT 2025: Daily automation completed successfully
+Wed Sep 24 09:00:12 PDT 2025: Cron job execution completed
+Thu Sep 25 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Thu Sep 25 09:00:13 PDT 2025: Daily automation completed successfully
+Thu Sep 25 09:00:13 PDT 2025: Cron job execution completed
+Fri Sep 26 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Fri Sep 26 09:00:15 PDT 2025: Daily automation completed successfully
+Fri Sep 26 09:00:15 PDT 2025: Cron job execution completed
+Sat Sep 27 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Sat Sep 27 09:00:12 PDT 2025: Daily automation completed successfully
+Sat Sep 27 09:00:12 PDT 2025: Cron job execution completed
+Sun Sep 28 08:00:00 PDT 2025: Starting Open Build weekly analytics report...
+2025-09-28 08:00:02,526 - INFO - Database initialized successfully
+2025-09-28 08:00:02,526 - WARNING - Google Analytics credentials not configured
+2025-09-28 08:00:02,526 - WARNING - YouTube API credentials not configured
+Traceback (most recent call last):
+  File "<string>", line 78, in <module>
+    asyncio.run(send_weekly_report())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "<string>", line 71, in send_weekly_report
+    os.getenv('TEAM_EMAIL', 'team@open.build'),
+    ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+Sun Sep 28 08:00:02 PDT 2025: Weekly analytics report completed
+Sun Sep 28 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Sun Sep 28 09:00:12 PDT 2025: Daily automation completed successfully
+Sun Sep 28 09:00:12 PDT 2025: Cron job execution completed
+Mon Sep 29 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Mon Sep 29 09:00:12 PDT 2025: Daily automation completed successfully
+Mon Sep 29 09:00:12 PDT 2025: Cron job execution completed
+Tue Sep 30 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Tue Sep 30 09:00:12 PDT 2025: Daily automation completed successfully
+Tue Sep 30 09:00:12 PDT 2025: Cron job execution completed
+Wed Oct  1 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Wed Oct  1 09:00:12 PDT 2025: Daily automation completed successfully
+Wed Oct  1 09:00:12 PDT 2025: Cron job execution completed
+Thu Oct  2 09:00:00 PDT 2025: Starting Open Build daily outreach automation...
+Thu Oct  2 09:00:13 PDT 2025: Daily automation completed successfully
+Thu Oct  2 09:00:13 PDT 2025: Cron job execution completed
 </div>
                 </div>
 
@@ -519,65 +544,66 @@ Sun Sep 21 09:09:16 PDT 2025: Cron job execution completed
                 <div id="daily_automation_errors.log" class="log-content ">
                     <div style="margin-bottom: 10px;">
                         <strong>File:</strong> logs/daily_automation_errors.log | 
-                        <strong>Size:</strong> 3561 bytes | 
-                        <strong>Modified:</strong> 2025-09-21 09:09:16
+                        <strong>Size:</strong> 28408 bytes | 
+                        <strong>Modified:</strong> 2025-10-02 09:00:13
                     </div>
-                    <div class="log-box">2025-09-19 12:17:33,184 - INFO - Database initialized successfully
-2025-09-19 12:17:33,184 - INFO - Starting daily outreach automation...
-2025-09-19 12:17:33,184 - INFO - Phase 1: Discovering new targets...
-2025-09-19 12:19:39,601 - WARNING - HTTP 429 for https://venturebeat.com
-2025-09-19 12:20:15,801 - WARNING - Robots.txt disallows fetching: https://dev.to
-2025-09-19 12:24:48,937 - WARNING - HTTP 403 for https://f6s.com
-2025-09-19 12:25:31,250 - INFO - Discovered 0 new targets
-2025-09-19 12:25:31,255 - INFO - Phase 2: Preparing outreach list...
-2025-09-19 12:25:31,264 - INFO - Phase 3: Sending 0 outreach emails...
-2025-09-19 12:25:31,265 - INFO - Phase 4: Collecting analytics data...
-2025-09-19 12:25:31,265 - WARNING - Google Analytics credentials not configured
-2025-09-19 12:25:31,265 - WARNING - YouTube API credentials not configured
-2025-09-19 12:25:31,495 - INFO - Phase 5: Gathering response and source data...
-2025-09-19 12:25:31,495 - INFO - Phase 6: Sending enhanced daily report...
-2025-09-19 12:25:32,150 - INFO - Email sent successfully to team@open.build
-2025-09-19 12:25:32,151 - INFO - Daily automation completed successfully. New targets: 0, Emails sent: 0
-2025-09-20 09:00:03,280 - INFO - Database initialized successfully
-2025-09-20 09:00:03,282 - INFO - Starting daily outreach automation...
-2025-09-20 09:00:03,282 - INFO - Phase 1: Discovering new targets...
-2025-09-20 09:02:41,896 - WARNING - HTTP 429 for https://venturebeat.com
-2025-09-20 09:03:15,646 - WARNING - Robots.txt disallows fetching: https://dev.to
-2025-09-20 09:08:09,771 - WARNING - HTTP 403 for https://f6s.com
-2025-09-20 09:08:52,343 - INFO - Discovered 0 new targets
-2025-09-20 09:08:52,345 - INFO - Phase 2: Preparing outreach list...
-2025-09-20 09:08:52,355 - INFO - Phase 3: Sending 0 outreach emails...
-2025-09-20 09:08:52,356 - INFO - Phase 4: Collecting analytics data...
-2025-09-20 09:08:52,356 - WARNING - Google Analytics credentials not configured
-2025-09-20 09:08:52,356 - WARNING - YouTube API credentials not configured
-2025-09-20 09:08:52,576 - INFO - Phase 5: Gathering response and source data...
-2025-09-20 09:08:52,577 - INFO - Phase 6: Sending enhanced daily report...
-2025-09-20 09:08:53,236 - INFO - Email sent successfully to team@open.build
-2025-09-20 09:08:53,237 - INFO - Daily automation completed successfully. New targets: 0, Emails sent: 0
-2025-09-21 09:00:01,663 - INFO - Database initialized successfully
-2025-09-21 09:00:01,664 - INFO - Starting daily outreach automation...
-2025-09-21 09:00:01,664 - INFO - Phase 1: Discovering new targets...
-2025-09-21 09:02:17,996 - WARNING - HTTP 429 for https://venturebeat.com
-2025-09-21 09:03:15,774 - WARNING - Robots.txt disallows fetching: https://dev.to
-2025-09-21 09:08:25,857 - WARNING - HTTP 403 for https://f6s.com
-2025-09-21 09:09:15,378 - INFO - Discovered 0 new targets
-2025-09-21 09:09:15,384 - INFO - Phase 2: Preparing outreach list...
-2025-09-21 09:09:15,399 - INFO - Phase 3: Sending 0 outreach emails...
-2025-09-21 09:09:15,399 - INFO - Phase 4: Collecting analytics data...
-2025-09-21 09:09:15,400 - WARNING - Google Analytics credentials not configured
-2025-09-21 09:09:15,400 - WARNING - YouTube API credentials not configured
-2025-09-21 09:09:15,686 - INFO - Phase 5: Gathering response and source data...
-2025-09-21 09:09:15,688 - INFO - Phase 6: Sending enhanced daily report...
-2025-09-21 09:09:16,430 - INFO - Email sent successfully to team@open.build
-2025-09-21 09:09:16,431 - INFO - Daily automation completed successfully. New targets: 0, Emails sent: 0
+                    <div class="log-box">2025-10-01 09:00:11,820 - WARNING - YouTube API credentials not configured
+2025-10-01 09:00:12,053 - INFO - Phase 4.5: Generating daily training blog article...
+2025-10-01 09:00:12,055 - INFO - Database initialized successfully
+2025-10-01 09:00:12,055 - INFO - Article already exists for 2025-10-01
+2025-10-01 09:00:12,056 - INFO - Generated blog article: Learning Management Platform
+2025-10-01 09:00:12,056 - INFO - Phase 5: Gathering response and source data...
+2025-10-01 09:00:12,057 - INFO - Phase 6: Recording daily statistics...
+2025-10-01 09:00:12,061 - INFO - Recorded daily stats and cleaned old data: {'new_targets': 0, 'emails_sent': 0, 'total_targets': 0, 'errors': 0}
+2025-10-01 09:00:12,061 - INFO - Phase 7: Sending enhanced daily report...
+2025-10-01 09:00:12,062 - INFO - Database initialized successfully
+2025-10-01 09:00:12,743 - INFO - Email sent successfully to team@open.build
+2025-10-01 09:00:12,743 - INFO - Daily automation completed successfully. New targets: 0, Emails sent: 0
+2025-10-02 09:00:02,809 - INFO - Database initialized successfully
+2025-10-02 09:00:02,814 - INFO - Starting daily outreach automation...
+2025-10-02 09:00:02,816 - INFO - Phase 1: Discovering new targets...
+2025-10-02 09:00:02,816 - INFO - Discovering targets from 15 curated sources...
+2025-10-02 09:00:02,817 - INFO - Target already exists: YC Startup School
+2025-10-02 09:00:02,821 - INFO - Target already exists: FreeCodeCamp
+2025-10-02 09:00:02,823 - INFO - Target already exists: The Odin Project
+2025-10-02 09:00:02,824 - INFO - Target already exists: CodeNewbie
+2025-10-02 09:00:02,825 - INFO - Target already exists: Lambda School
+2025-10-02 09:00:02,825 - INFO - Target already exists: App Academy
+2025-10-02 09:00:02,825 - INFO - Target already exists: General Assembly
+2025-10-02 09:00:02,826 - INFO - Target already exists: Codecademy
+2025-10-02 09:00:02,827 - INFO - Target already exists: Dev.to
+2025-10-02 09:00:02,827 - INFO - Target already exists: AngelList
+2025-10-02 09:00:02,828 - INFO - Target already exists: Product Hunt
+2025-10-02 09:00:02,829 - INFO - Target already exists: Indie Hackers
+2025-10-02 09:00:02,830 - INFO - Target already exists: Stack Overflow
+2025-10-02 09:00:02,831 - INFO - Target already exists: GitHub Education
+2025-10-02 09:00:02,831 - INFO - Target already exists: Coursera
+2025-10-02 09:00:12,254 - INFO - Discovered 0 new targets
+2025-10-02 09:00:12,255 - INFO - Phase 2: Preparing outreach list...
+2025-10-02 09:00:12,257 - WARNING - No targets ready for outreach - consider running target discovery
+2025-10-02 09:00:12,257 - INFO - Phase 3: Sending 0 outreach emails...
+2025-10-02 09:00:12,257 - INFO - Phase 4: Collecting analytics data...
+2025-10-02 09:00:12,257 - WARNING - Google Analytics credentials not configured
+2025-10-02 09:00:12,257 - WARNING - YouTube API credentials not configured
+2025-10-02 09:00:12,522 - INFO - Phase 4.5: Generating daily training blog article...
+2025-10-02 09:00:12,524 - INFO - Database initialized successfully
+2025-10-02 09:00:12,525 - INFO - Article already exists for 2025-10-02
+2025-10-02 09:00:12,525 - INFO - Generated blog article: Smart Building Management System
+2025-10-02 09:00:12,525 - INFO - Phase 5: Gathering response and source data...
+2025-10-02 09:00:12,527 - INFO - Phase 6: Recording daily statistics...
+2025-10-02 09:00:12,529 - INFO - Recorded daily stats and cleaned old data: {'new_targets': 0, 'emails_sent': 0, 'total_targets': 0, 'errors': 0}
+2025-10-02 09:00:12,529 - INFO - Phase 7: Sending enhanced daily report...
+2025-10-02 09:00:12,530 - INFO - Database initialized successfully
+2025-10-02 09:00:13,181 - INFO - Email sent successfully to team@open.build
+2025-10-02 09:00:13,181 - INFO - Daily automation completed successfully. New targets: 0, Emails sent: 0
 </div>
                 </div>
 
                 <div id="weekly_analytics.log" class="log-content ">
                     <div style="margin-bottom: 10px;">
                         <strong>File:</strong> logs/weekly_analytics.log | 
-                        <strong>Size:</strong> 508 bytes | 
-                        <strong>Modified:</strong> 2025-09-21 08:00:01
+                        <strong>Size:</strong> 1018 bytes | 
+                        <strong>Modified:</strong> 2025-09-28 08:00:01
                     </div>
                     <div class="log-box">
 🚀 Open Build Outreach Automation Report
@@ -602,23 +628,47 @@ Sun Sep 21 09:09:16 PDT 2025: Cron job execution completed
 ---
 Generated on 2025-09-21 08:00:01
 
+
+🚀 Open Build Outreach Automation Report
+========================================
+
+📊 Overall Statistics:
+• Total targets in database: 13
+• Targets contacted: 13
+• Emails sent (last 7 days): 0
+• Contact rate: 100.0%
+
+📋 Target Breakdown by Category:
+• Community: 4
+• Influencer: 1
+• Startup: 7
+• Startup_Publications: 1
+
+📈 Performance Metrics:
+• Average targets discovered per day: 0.020440251572327043
+• Outreach efficiency: 0.0 emails/day
+
+---
+Generated on 2025-09-28 08:00:01
+
 </div>
                 </div>
 
                 <div id="weekly_analytics_errors.log" class="log-content ">
                     <div style="margin-bottom: 10px;">
                         <strong>File:</strong> logs/weekly_analytics_errors.log | 
-                        <strong>Size:</strong> 67 bytes | 
-                        <strong>Modified:</strong> 2025-09-21 08:00:01
+                        <strong>Size:</strong> 134 bytes | 
+                        <strong>Modified:</strong> 2025-09-28 08:00:01
                     </div>
                     <div class="log-box">2025-09-21 08:00:01,518 - INFO - Database initialized successfully
+2025-09-28 08:00:01,958 - INFO - Database initialized successfully
 </div>
                 </div>
 
             </div>
             
             <div class="timestamp">
-                📅 Report generated on 2025-09-21 10:11:17
+                📅 Report generated on 2025-11-15 08:19:13
             </div>
         </div>
     </div>
