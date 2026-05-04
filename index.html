@@ -45,6 +45,37 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="font-['Inter'] bg-white dark:bg-gray-900 dark:bg-gray-900 text-gray-900 dark:text-white dark:text-white transition-colors duration-300">
+
+    <!-- Pre-header: GitHub repo bar -->
+    <div id="repo-bar" class="bg-gray-950 text-gray-300 text-xs py-2 border-b border-gray-800">
+        <div class="container mx-auto px-6 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-1 text-gray-400">
+                <i class="fab fa-github mr-1"></i>
+                <span class="font-semibold text-gray-200">Open Source:</span>
+            </div>
+            <div class="flex items-center gap-4 flex-wrap">
+                <a href="https://github.com/buildlyio/buildly-core" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">
+                    <i class="fas fa-cube text-blue-400"></i> buildly-core
+                </a>
+                <a href="https://github.com/buildlyio/bb-agent-manager" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">
+                    <i class="fas fa-network-wired text-purple-400"></i> bb-agent-manager
+                </a>
+                <a href="https://github.com/buildlyio/babblebeaver" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">
+                    <i class="fas fa-comments text-cyan-400"></i> babblebeaver
+                </a>
+                <a href="https://github.com/buildlyio" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">
+                    <i class="fas fa-code-branch text-green-400"></i> forge-apps
+                </a>
+                <a href="https://github.com/buildlyio" target="_blank" class="text-gray-500 hover:text-white transition-colors">
+                    View all repos &rarr;
+                </a>
+            </div>
+            <button onclick="document.getElementById('repo-bar').remove()" class="text-gray-600 hover:text-gray-300 transition-colors ml-2" aria-label="Dismiss">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="bg-white dark:bg-gray-900/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 dark:border-gray-700 fixed w-full z-50 transition-colors duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -137,9 +168,14 @@
             <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-4 max-w-3xl mx-auto">
                 We build open-source tools, training systems, and standards to keep developers relevant in an AI-driven world.
             </p>
-            <p class="text-base md:text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            <p class="text-base md:text-lg text-gray-500 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
                 Open Build helps developers stay relevant in an AI-generated software world by training them to work with, audit, guide, and improve open-source AI-assisted development systems.
             </p>
+            <div class="inline-block bg-gray-900/5 dark:bg-white/5 border border-gray-200 dark:border-gray-700 rounded-xl px-6 py-3 mb-8 max-w-2xl mx-auto">
+                <p class="text-sm text-gray-700 dark:text-gray-300 italic">
+                    &ldquo;Open Build exists to ensure developers are not replaced by AI&nbsp;&mdash;&nbsp;but empowered by it through open, transparent systems.&rdquo;
+                </p>
+            </div>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#open-source" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
                     Explore Open Source
@@ -380,8 +416,9 @@
     <section id="training" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
+                <div class="inline-block bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300 text-sm font-semibold px-4 py-2 rounded-full mb-4">The Foundry &mdash; Real-World Training Lab</div>
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">From Developer to AI-Native Builder</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">A real-world training pathway powered by the Foundry and First City Foundry partnership — learn by contributing, ship real work, grow into AI-assisted roles.</p>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">The Foundry is a real-world lab where developers learn by building production software with AI tools &mdash; not toy exercises. It replaces the traditional junior pathway for an AI-native world.</p>
             </div>
             
             <div class="max-w-4xl mx-auto">
@@ -398,9 +435,27 @@
                     </div>
                     <div class="text-center">
                         <div class="w-16 h-16 bg-cyan-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Transition into AI-Assisted Roles</h3>
-                        <p class="text-gray-600 dark:text-gray-300 text-sm">Graduates emerge ready for AI-native workflows — directing agents, reviewing AI-generated code, and architecting systems that combine human judgment with AI speed.</p>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Earn Verified Credentials</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Graduates earn verified Buildly credentials that demonstrate real AI-native development skills — directing agents, reviewing AI-generated code, and architecting systems that combine human judgment with AI speed.</p>
+                        <a href="https://collab.buildly.io/onboarding/verify/" target="_blank" class="inline-flex items-center mt-3 text-cyan-600 dark:text-cyan-400 hover:underline text-sm font-semibold">
+                            Verify a credential <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
                     </div>
+                </div>
+
+                <!-- Credentials callout -->
+                <div class="bg-gray-900 dark:bg-gray-950 rounded-2xl p-6 mb-6 flex flex-col sm:flex-row items-center gap-6">
+                    <div class="w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-certificate text-white text-2xl"></i>
+                    </div>
+                    <div class="flex-grow text-center sm:text-left">
+                        <div class="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-1">Powered by Buildly</div>
+                        <h4 class="text-lg font-bold text-white mb-1">Verified Developer Credentials</h4>
+                        <p class="text-gray-400 text-sm">Developers who complete the Foundry pathway earn verifiable credentials backed by Buildly — proof of real skills in AI-assisted development, open-source contribution, and modern software workflows.</p>
+                    </div>
+                    <a href="https://collab.buildly.io/onboarding/verify/" target="_blank" class="flex-shrink-0 bg-cyan-500 hover:bg-cyan-400 text-gray-900 font-bold px-5 py-3 rounded-lg text-sm transition-colors whitespace-nowrap">
+                        Verify Credentials <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
                 </div>
                 
                 <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 rounded-2xl p-8 border border-blue-100 dark:border-gray-700">
@@ -410,7 +465,7 @@
                         </div>
                         <div>
                             <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Training Home: First City Foundry</h4>
-                            <p class="text-gray-600 dark:text-gray-300 mb-4">The Open Build Foundry program is hosted at <a href="https://firstcityfoundry.com" target="_blank" class="text-blue-600 hover:underline font-medium">First City Foundry</a> — a Kansas City-based innovation hub that provides physical space, community, and access to real startup projects. This partnership grounds our training in the real economy of local tech.</p>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">The Open Build Foundry program is hosted at <a href="https://firstcityfoundry.com" target="_blank" class="text-blue-600 hover:underline font-medium">First City Foundry</a> — a Kansas City-based innovation hub that provides physical space, startup community, and access to real production projects. This is not a bootcamp or a sandbox. Developers work on live software, using the same AI-assisted tools the OSS projects are built with, supervised by practitioners shipping real products.</p>
                             <a href="https://firstcityfoundry.com" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors">
                                 Visit First City Foundry <i class="fas fa-external-link-alt ml-2"></i>
                             </a>
